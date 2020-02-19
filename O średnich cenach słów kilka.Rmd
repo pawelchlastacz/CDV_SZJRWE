@@ -1,0 +1,123 @@
+  
+  #Po zebraniu średnich cen miesięcznych, możemy otrzymać średnie sumy roczne:
+  
+  sredniecenykoszyka = (Sr_Mleko_2.5proc + Sr_Mleko_3.5proc + Sr_Ser_dojrzewajacy + Sr_Koszulka + Sr_Ziemniaki  
+                        + Sr_Woda + Sr_Wegiel_kamienny + Sr_Ser_twarogowy + Sr_Jajka + Sr_Jablka)
+  View(sredniecenykoszyka)
+  kosztkoszyka<-gather(round(średniecenykoszyka, digits=2), ROK, KOSZYK)
+  View(kosztkoszyka)
+  print(Rok i koszt zakupu w nim koszyka)
+  print(kosztkoszyka)
+  
+  summary(kosztkoszyka)
+  summary(kosztkoszykabezwegla)
+  
+  
+  plot(kosztkoszyka$ROK, kosztkoszyka$KOSZYK,
+  xlab = "ROK", ylab = "KOSZT ZAKUPU PRODUKTÓW W KOSZYKU",
+  main = "Koszt zakupu koszyka zakupów w latach 2006-2019",
+  type="o",
+  col="red")
+  
+  #Bez uwzględnienia węgla, którego teoretycznie często na co dzień nie kupujemy. Czy jego nieuwzględnienie coś zmienia?
+  
+  
+  sredniecenykoszykabezwegla = (Sr_Mleko_2.5proc + Sr_Mleko_3.5proc + Sr_Ser_dojrzewajacy + Sr_Koszulka + Sr_Ziemniaki  
+                        + Sr_Woda  + Sr_Ser_twarogowy + Sr_Jajka + Sr_Jablka)
+  
+  kosztkoszykabezwegla<-gather(round(sredniecenykoszykabezwegla, digits=2), ROK, KOSZYK)
+  View(kosztkoszykabezwegla)
+  
+  plot(kosztkoszykabezwegla$ROK, kosztkoszykabezwegla$KOSZYK,
+  xlab = "ROK", ylab = "KOSZT ZAKUPU PRODUKTÓW W KOSZYKU",
+  main = "Koszt zakupu koszyka zakupów w latach 2006-2019",
+  type="o",
+  col="orange")
+
+  #Sprawdżmy, jak w stosunku do wynagrodzeń minimalnych oraz średnich zachowywały się średnie ceny:
+  
+  #Obliczmy zatem korelację cen i wynagrodzeń:
+  
+  
+  lista_srednich_cen<-c(637.72, 683.69, 809.08, 840.34, 891.87, 943.61, 960.00, 963.08, 945.18,
+    934.29, 939.77, 1046.58, 1049.23, 1048.22)
+  lata<-c(2006:2019)  
+  #*******
+  minimalne_wynagrodzenie<-c(899,936,1126,1276,1317,
+                           1386,1500,1600,1680 ,1750,
+                           1850,2000,2100,2250)
+  ceny_a_wynagrodzenie<-data.frame(
+    lata=c(lata),
+    wynagrodzenie=c(minimalne_wynagrodzenie),
+    ceny=c(lista_srednich_cen)
+  )
+  korelacja<-cor(ceny_a_wynagrodzenie$ceny,ceny_a_wynagrodzenie$wynagrodzenie)
+  print(korelacja)
+  
+  regresja<-lm(ceny_a_wynagrodzenie$ceny~ceny_a_wynagrodzenie$wynagrodzenie)
+  
+  plot(ceny_a_wynagrodzenie$wynagrodzenie,ceny_a_wynagrodzenie$ceny, col="blue", main="Regresja wynagrodzenie~ceny",
+       abline(regresja),cex=1.3, pch= 16, xlab= "Minimalne wynagrodzenie brutto", ylab="Wartość koszyka")
+  
+  #*******
+  
+  srednie_wynagrodzenie<-c(2637,2866,3158,3315,3435,3625,3744,3877,4004,4151,4291,4528,4835,	  
+                           5169)
+  ceny_a_wynagrodzeniesrednie<-data.frame(
+    lata=c(lata),
+    wynagrodzeniesrednie=c(srednie_wynagrodzenie),
+    ceny=c(lista_srednich_cen)
+  )
+  korelacja<-cor(ceny_a_wynagrodzeniesrednie$ceny,ceny_a_wynagrodzeniesrednie$wynagrodzeniesrednie)
+  print(korelacja)
+  
+  
+  regresja<-lm(ceny_a_wynagrodzeniesrednie$ceny~ceny_a_wynagrodzeniesrednie$wynagrodzeniesrednie)
+  
+  plot(ceny_a_wynagrodzeniesrednie$wynagrodzeniesrednie,ceny_a_wynagrodzeniesrednie$ceny, col="blue", main="Regresja wynagrodzenie~ceny średnie",
+       abline(regresja),cex=1.3, pch= 16, xlab= "Średnie wynagrodzenie brutto", ylab="Wartość koszyka")
+  
+  #Mam także wariant bezwęglowy...ale zachowuje się identycznie
+  
+  #*******
+  lista_srednich_cen_bezwegla<-c(117.52,130.62,126.25,127.51,137.25,132.67,137.99,144.15,144.59,145.61,150.16,154.43,154.60,163.12)
+  lata<-c(2006:2019)  
+  minimalne_wynagrodzenie<-c(899,936,1126,1276,1317,
+                             1386,1500,1600,1680 ,1750,
+                             1850,2000,2100,2250)
+  ceny_a_wynagrodzenie<-data.frame(
+    lata=c(lata),
+    wynagrodzenie=c(minimalne_wynagrodzenie),
+    ceny=c(lista_srednich_cen_bezwegla)
+  )
+  korelacja<-cor(ceny_a_wynagrodzenie$ceny,ceny_a_wynagrodzenie$wynagrodzenie)
+  print(korelacja)
+  
+  regresja<-lm(ceny_a_wynagrodzenie$ceny~ceny_a_wynagrodzenie$wynagrodzenie)
+  
+  plot(ceny_a_wynagrodzenie$wynagrodzenie,ceny_a_wynagrodzenie$ceny, col="blue", main="Regresja wynagrodzenie~ceny",
+       abline(regresja),cex=1.0, pch= 16, xlab= "Minimalne wynagrodzenie brutto", ylab="Wartość koszyka")
+  
+  #*******
+  
+  srednie_wynagrodzenie<-c(2637,2866,3158,3315,3435,3625,3744,3877,4004,4151,4291,4528,4835,	  
+                           5169)
+  ceny_a_wynagrodzeniesrednie<-data.frame(
+    lata=c(lata),
+    wynagrodzeniesrednie=c(srednie_wynagrodzenie),
+    ceny=c(lista_srednich_cen_bezwegla)
+  )
+  korelacja<-cor(ceny_a_wynagrodzeniesrednie$ceny,ceny_a_wynagrodzeniesrednie$wynagrodzeniesrednie)
+  print(korelacja)
+  
+  regresja<-lm(ceny_a_wynagrodzeniesrednie$ceny~ceny_a_wynagrodzeniesrednie$wynagrodzeniesrednie)
+  
+  plot(ceny_a_wynagrodzeniesrednie$wynagrodzeniesrednie,ceny_a_wynagrodzeniesrednie$ceny, col="blue", main="Regresja wynagrodzenie średnie~ceny",
+       abline(regresja),cex=1.0, pch= 16, xlab= "Średnie wynagrodzenie brutto", ylab="Wartość koszyka")
+
+  #*********************************************************************************************************************************************
+  
+  
+  
+  
+  

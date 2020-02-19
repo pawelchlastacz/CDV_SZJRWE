@@ -1,0 +1,27 @@
+ 
+  #Najwyższy/najniższy koszt comiesięcznego zakupu koszyka produktów w latach 2006-2019 w koszyku 
+  #zobaczymy sami wybierając sortowane wg kosztu w tabeli Wynik, która się wyświetli. 
+
+
+Wojewodztwa <- c('Polska','Dolnośląskie','Kujawsko-pomorskie','Lubelskie','Lubuskie','Łódzkie','Małopolskie',
+'Mazowieckie','Opolskie','Podkarpackie','Podlaskie','Pomorskie','Śląskie','Świętkorzyskie','Warmińsko-mazurskie',
+'Wielkopolskie','Zachodniopomorskie')
+print(Wojewodztwa)
+Wedlugwojewodztw = data.frame(tab)
+
+Wynik <- data.frame(Koszt= apply(Wedlugwojewodztw[3:1682], 1, sum))
+
+rownames(Wynik) <- c('Polska','Dolnośląskie','Kujawsko-pomorskie','Lubelskie','Lubuskie','Łódzkie','Małopolskie',
+'Mazowieckie','Opolskie','Podkarpackie','Podlaskie','Pomorskie','Śląskie','Świętkorzyskie','Warmińsko-mazurskie',
+'Wielkopolskie','Zachodniopomorskie')
+
+koszykwojewodztwa<-gather(Wynik, WOJEWÓDZTWA, CENA)
+rownames(koszykwojewodztwa) <- c('Polska','Dolnośląskie','Kujawsko-pomorskie','Lubelskie','Lubuskie','Łódzkie','Małopolskie',
+'Mazowieckie','Opolskie','Podkarpackie','Podlaskie','Pomorskie','Śląskie','Świętkorzyskie','Warmińsko-mazurskie',
+'Wielkopolskie','Zachodniopomorskie')
+
+View(Wynik)
+
+
+  
+  

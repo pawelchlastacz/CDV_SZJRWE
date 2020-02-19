@@ -1,0 +1,947 @@
+Mleko_3.5proc<-c(tab[,3],tab[,4],tab[,5],tab[,6],tab[,7],tab[,8],tab[,9],tab[,10],tab[,11],tab[,12],tab[,13],tab[,14],tab[,15],tab[,16])
+Mleko_2.5proc<-c(tab[,17],tab[,18],tab[,19],tab[,20],tab[,21],tab[,22],tab[,23],tab[,24],tab[,25],tab[,26],tab[,27],tab[,28],tab[,29],tab[,30])
+Ser_twarogowy<-c(tab[,31],tab[,32],tab[,33],tab[,34],tab[,35],tab[,36],tab[,37],tab[,38],tab[,39],tab[,40],tab[,41],tab[,42],tab[,43],tab[,44])
+Ser_dojrzewajacy<-c(tab[,45],tab[,46],tab[,47],tab[,48],tab[,49],tab[,50],tab[,51],tab[,52],tab[,53],tab[,54],tab[,55],tab[,56],tab[,57],tab[,58])
+Jajka<-c(tab[,59],tab[,60],tab[,61],tab[,62],tab[,63],tab[,64],tab[,65],tab[,66],tab[,67],tab[,68],tab[,69],tab[,70],tab[,71],tab[,72])
+Jablka<-c(tab[,73],tab[,74],tab[,75],tab[,76],tab[,77],tab[,78],tab[,79],tab[,80],tab[,81],tab[,82],tab[,83],tab[,84],tab[,85],tab[,86])
+Ziemniaki<-c(tab[,87],tab[,88],tab[,89],tab[,90],tab[,91],tab[,92],tab[,93],tab[,94],tab[,95],tab[,96],tab[,97],tab[,98],tab[,99],tab[,100])
+Koszulka<-c(tab[,101],tab[,102],tab[,103],tab[,104],tab[,105],tab[,106],tab[,107],tab[,108],tab[,109],tab[,110],tab[,111],tab[,112],tab[,113],tab[,114])
+Woda<-c(tab[,115],tab[,116],tab[,117],tab[,118],tab[,119],tab[,120],tab[,121],tab[,122],tab[,123],tab[,124],tab[,125],tab[,126],tab[,127],tab[,128])
+Wegiel_kamienny<-c(tab[,129],tab[,130],tab[,131],tab[,132],tab[,133],tab[,134],tab[,135],tab[,136],tab[,137],tab[,138],tab[,139],tab[,140],tab[,141],tab[,142])
+
+
+Wojewodztwa <- c('Dolnośląskie','Kujawsko-pomorskie','Lubelskie','Lubuskie','Łódzkie','Małopolskie',
+'Mazowieckie','Opolskie','Podkarpackie','Podlaskie', 'Polska', 'Pomorskie','Śląskie','Świętkorzyskie','Warmińsko-mazurskie',
+'Wielkopolskie','Zachodniopomorskie')
+
+
+tab[,2]
+tab[,2]<-as.character(tab[,2])
+woj<-rep(c("Polska","dolnoslaskie","kujawsko-pomorskie","lubelskie","lubuskie","lodzkie","malopolskie",
+           "mazowieckie","opolskie","podkarpackie","podlaskie","pomorskie","slaskie","swietokrzyskie","warminsko-mazurskie","wielkopolskie","zachodniopomorskie"),12*140)
+woj1<-(woj,12)
+length(woj1)
+rok<-rep(c("2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"),each=17)
+rok1<-rep(rok,12)
+length(rok1)
+mies<-rep(c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru"),each=238)
+mon<-factor(mies, levels=c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru"), ordered = TRUE)
+
+j=0
+Mleko_3.5proc<-c(tab[,j+3],tab[,j+4],tab[,j+5],tab[,j+6],tab[,j+7],tab[,j+8],tab[,j+9],tab[,j+10],tab[,j+11],tab[,j+12],tab[,j+13],tab[,j+14],tab[,j+15],tab[,j+16])
+Mleko_2.5proc<-c(tab[,j+17],tab[,j+18],tab[,j+19],tab[,j+20],tab[,j+21],tab[,j+22],tab[,j+23],tab[,j+24],tab[,j+25],tab[,j+26],tab[,j+27],tab[,j+28],tab[,j+29],tab[,j+30])
+Ser_twarogowy<-c(tab[,j+31],tab[,j+32],tab[,j+33],tab[,j+34],tab[,j+35],tab[,j+36],tab[,j+37],tab[,j+38],tab[,j+39],tab[,j+40],tab[,j+41],tab[,j+42],tab[,j+43],tab[,j+44])
+Ser_dojrzewajacy<-c(tab[,j+45],tab[,j+46],tab[,j+47],tab[,j+48],tab[,j+49],tab[,j+50],tab[,j+51],tab[,j+52],tab[,j+53],tab[,j+54],tab[,j+55],tab[,j+56],tab[,j+57],tab[,j+58])
+Jajka<-c(tab[,j+59],tab[,j+60],tab[,j+61],tab[,j+62],tab[,j+63],tab[,j+64],tab[,j+65],tab[,j+66],tab[,j+67],tab[,j+68],tab[,j+69],tab[,j+70],tab[,j+71],tab[,j+72])
+Jablka<-c(tab[,j+73],tab[,j+74],tab[,j+75],tab[,j+76],tab[,j+77],tab[,j+78],tab[,j+79],tab[,j+80],tab[,j+81],tab[,j+82],tab[,j+83],tab[,j+84],tab[,j+85],tab[,j+86])
+Ziemniaki<-c(tab[,j+87],tab[,j+88],tab[,j+89],tab[,j+90],tab[,j+91],tab[,j+92],tab[,j+93],tab[,j+94],tab[,j+95],tab[,j+96],tab[,j+97],tab[,j+98],tab[,j+99],tab[,j+100])
+Koszulka<-c(tab[,j+101],tab[,j+102],tab[,j+103],tab[,j+104],tab[,j+105],tab[,j+106],tab[,j+107],tab[,j+108],tab[,j+109],tab[,j+110],tab[,j+111],tab[,j+112],tab[,j+113],tab[,j+114])
+Woda<-c(tab[,j+115],tab[,j+116],tab[,j+117],tab[,j+118],tab[,j+119],tab[,j+120],tab[,j+121],tab[,j+122],tab[,j+123],tab[,j+124],tab[,j+125],tab[,j+126],tab[,j+127],tab[,j+128])
+Wegiel_kamienny<-c(tab[,j+129],tab[,j+130],tab[,j+131],tab[,j+132],tab[,j+133],tab[,j+134],tab[,j+135],tab[,j+136],tab[,j+137],tab[,j+138],tab[,j+139],tab[,j+140],tab[,j+141],tab[,j+142])
+
+j=140
+Mleko_3.5proc<-c(Mleko_3.5proc,tab[,j+3],tab[,j+4],tab[,j+5],tab[,j+6],tab[,j+7],tab[,j+8],tab[,j+9],tab[,j+10],tab[,j+11],tab[,j+12],tab[,j+13],tab[,j+14],tab[,j+15],tab[,j+16])
+Mleko_2.5proc<-c(Mleko_2.5proc,tab[,j+17],tab[,j+18],tab[,j+19],tab[,j+20],tab[,j+21],tab[,j+22],tab[,j+23],tab[,j+24],tab[,j+25],tab[,j+26],tab[,j+27],tab[,j+28],tab[,j+29],tab[,j+30])
+Ser_twarogowy<-c(Ser_twarogowy,tab[,j+31],tab[,j+32],tab[,j+33],tab[,j+34],tab[,j+35],tab[,j+36],tab[,j+37],tab[,j+38],tab[,j+39],tab[,j+40],tab[,j+41],tab[,j+42],tab[,j+43],tab[,j+44])
+Ser_dojrzewajacy<-c(Ser_dojrzewajacy,tab[,j+45],tab[,j+46],tab[,j+47],tab[,j+48],tab[,j+49],tab[,j+50],tab[,j+51],tab[,j+52],tab[,j+53],tab[,j+54],tab[,j+55],tab[,j+56],tab[,j+57],tab[,j+58])
+Jajka<-c(Jajka,tab[,j+59],tab[,j+60],tab[,j+61],tab[,j+62],tab[,j+63],tab[,j+64],tab[,j+65],tab[,j+66],tab[,j+67],tab[,j+68],tab[,j+69],tab[,j+70],tab[,j+71],tab[,j+72])
+Jablka<-c(Jablka,tab[,j+73],tab[,j+74],tab[,j+75],tab[,j+76],tab[,j+77],tab[,j+78],tab[,j+79],tab[,j+80],tab[,j+81],tab[,j+82],tab[,j+83],tab[,j+84],tab[,j+85],tab[,j+86])
+Ziemniaki<-c(Ziemniaki,tab[,j+87],tab[,j+88],tab[,j+89],tab[,j+90],tab[,j+91],tab[,j+92],tab[,j+93],tab[,j+94],tab[,j+95],tab[,j+96],tab[,j+97],tab[,j+98],tab[,j+99],tab[,j+100])
+Koszulka<-c(Koszulka,tab[,j+101],tab[,j+102],tab[,j+103],tab[,j+104],tab[,j+105],tab[,j+106],tab[,j+107],tab[,j+108],tab[,j+109],tab[,j+110],tab[,j+111],tab[,j+112],tab[,j+113],tab[,j+114])
+Woda<-c(Woda,tab[,j+115],tab[,j+116],tab[,j+117],tab[,j+118],tab[,j+119],tab[,j+120],tab[,j+121],tab[,j+122],tab[,j+123],tab[,j+124],tab[,j+125],tab[,j+126],tab[,j+127],tab[,j+128])
+Wegiel_kamienny<-c(Wegiel_kamienny,tab[,j+129],tab[,j+130],tab[,j+131],tab[,j+132],tab[,j+133],tab[,j+134],tab[,j+135],tab[,j+136],tab[,j+137],tab[,j+138],tab[,j+139],tab[,j+140],tab[,j+141],tab[,j+142])
+
+j=11*140
+Mleko_3.5proc<-c(Mleko_3.5proc,tab[,j+3],tab[,j+4],tab[,j+5],tab[,j+6],tab[,j+7],tab[,j+8],tab[,j+9],tab[,j+10],tab[,j+11],tab[,j+12],tab[,j+13],tab[,j+14],tab[,j+15],tab[,j+16])
+Mleko_2.5proc<-c(Mleko_2.5proc,tab[,j+17],tab[,j+18],tab[,j+19],tab[,j+20],tab[,j+21],tab[,j+22],tab[,j+23],tab[,j+24],tab[,j+25],tab[,j+26],tab[,j+27],tab[,j+28],tab[,j+29],tab[,j+30])
+Ser_twarogowy<-c(Ser_twarogowy,tab[,j+31],tab[,j+32],tab[,j+33],tab[,j+34],tab[,j+35],tab[,j+36],tab[,j+37],tab[,j+38],tab[,j+39],tab[,j+40],tab[,j+41],tab[,j+42],tab[,j+43],tab[,j+44])
+Ser_dojrzewajacy<-c(Ser_dojrzewajacy,tab[,j+45],tab[,j+46],tab[,j+47],tab[,j+48],tab[,j+49],tab[,j+50],tab[,j+51],tab[,j+52],tab[,j+53],tab[,j+54],tab[,j+55],tab[,j+56],tab[,j+57],tab[,j+58])
+Jajka<-c(Jajka,tab[,j+59],tab[,j+60],tab[,j+61],tab[,j+62],tab[,j+63],tab[,j+64],tab[,j+65],tab[,j+66],tab[,j+67],tab[,j+68],tab[,j+69],tab[,j+70],tab[,j+71],tab[,j+72])
+Jablka<-c(Jablka,tab[,j+73],tab[,j+74],tab[,j+75],tab[,j+76],tab[,j+77],tab[,j+78],tab[,j+79],tab[,j+80],tab[,j+81],tab[,j+82],tab[,j+83],tab[,j+84],tab[,j+85],tab[,j+86])
+Ziemniaki<-c(Ziemniaki,tab[,j+87],tab[,j+88],tab[,j+89],tab[,j+90],tab[,j+91],tab[,j+92],tab[,j+93],tab[,j+94],tab[,j+95],tab[,j+96],tab[,j+97],tab[,j+98],tab[,j+99],tab[,j+100])
+Koszulka<-c(Koszulka,tab[,j+101],tab[,j+102],tab[,j+103],tab[,j+104],tab[,j+105],tab[,j+106],tab[,j+107],tab[,j+108],tab[,j+109],tab[,j+110],tab[,j+111],tab[,j+112],tab[,j+113],tab[,j+114])
+Woda<-c(Woda,tab[,j+115],tab[,j+116],tab[,j+117],tab[,j+118],tab[,j+119],tab[,j+120],tab[,j+121],tab[,j+122],tab[,j+123],tab[,j+124],tab[,j+125],tab[,j+126],tab[,j+127],tab[,j+128])
+Wegiel_kamienny<-c(Wegiel_kamienny,tab[,j+129],tab[,j+130],tab[,j+131],tab[,j+132],tab[,j+133],tab[,j+134],tab[,j+135],tab[,j+136],tab[,j+137],tab[,j+138],tab[,j+139],tab[,j+140],tab[,j+141],tab[,j+142])
+
+
+dane<-data.frame(woj=woj1, rok=rok1, mies=mies, mon=mon, Mleko_3.5proc=Mleko_3.5proc, Mleko_2.5proc=Mleko_2.5proc,Ser_twarogowy=Ser_twarogowy, 
+                 Ser_dojrzewajacy=Ser_dojrzewajacy, Jajka=Jajka, Jablka=Jablka,
+                 Ziemniaki=Ziemniaki, Koszulka=Koszulka, Woda=Woda, Wegiel_kamienny=Wegiel_kamienny)
+
+dane[is.na(dane)] <- 0
+
+dim(dane)
+View(dane)
+
+#średnie ceny produktów w poszczególnych latach
+for(i in 5:14){
+  print(tapply(dane[,i],dane[,2],mean))
+}
+
+#odchylenie standardowe w poszczególnych latach
+for(i in 5:14){
+  print(tapply(dane[,i],dane[,2],sd))
+}
+
+#średnie ceny produktów z lat 2006-2019 w poszczególnych województwach
+sr_Mleko_3.5proc<-tapply(dane[,5],dane[,1],mean)
+sr_Mleko_2.5proc<-tapply(dane[,6],dane[,1],mean)
+sr_Ser_twarogowy<-tapply(dane[,7],dane[,1],mean,na.rm=T)
+sr_Ser_dojrzewajacy<-tapply(dane[,8],dane[,1],mean)
+sr_Jajka<-tapply(dane[,9],dane[,1],mean)
+sr_Jablka<-tapply(dane[,10],dane[,1],mean)
+sr_Ziemniaki<-tapply(dane[,11],dane[,1],mean)
+sr_Koszulka<-tapply(dane[,12],dane[,1],mean)
+sr_Woda<-tapply(dane[,13],dane[,1],mean)
+sr_Wegiel_kamienny<-tapply(dane[,14],dane[,1],mean)
+
+
+#zestawienie średnich cen produktów z lat 2006-2019 w poszczególnych województwach
+srednie<-data.frame(woj=as.factor(sort(tab[,1])), sr_Mleko_3.5proc=sr_Mleko_3.5proc, sr_Mleko_2.5proc=sr_Mleko_2.5proc, sr_Ser_twarogowy=sr_Ser_twarogowy, 
+                    sr_Ser_dojrzewajacy=sr_Ser_dojrzewajacy, sr_Jajka=sr_Jajka, sr_Jablka=sr_Jablka,
+                    sr_Ziemniaki=sr_Ziemniaki, sr_Koszulka=sr_Koszulka, sr_Woda=sr_Woda, sr_Wegiel_kamienny=sr_Wegiel_kamienny)
+View(srednie)
+
+#koszyki ze średnimi cenami z lat 2006-2019
+koszyk_dolnoslaskie<-data.frame(sum(srednie[1,2:11]))
+koszyk_kujawsko_pomorskie<-data.frame(sum(srednie[2,2:11]))
+koszyk_lodzkie<-data.frame(sum(srednie[3,2:11]))
+koszyk_lubelskie<-data.frame(sum(srednie[4,2:11]))
+koszyk_lubuskie<-data.frame(sum(srednie[5,2:11]))
+koszyk_malopolskie<-data.frame(sum(srednie[6,2:11]))
+koszyk_mazowieckie<-data.frame(sum(srednie[7,2:11]))
+koszyk_opolskie<-data.frame(sum(srednie[8,2:11]))
+koszyk_podkarpackie<-data.frame(sum(srednie[9,2:11]))
+koszyk_podlaskie<-data.frame(sum(srednie[10,2:11]))
+koszyk_polska<-data.frame(sum(srednie[11,2:11]))
+koszyk_pomorskie<-data.frame(sum(srednie[12,2:11]))
+koszyk_slaskie<-data.frame(sum(srednie[13,2:11]))
+koszyk_swietokrzyskie<-data.frame(sum(srednie[14,2:11]))
+koszyk_warminsko_mazurskie<-data.frame(sum(srednie[15,2:11]))
+koszyk_wielkopolskie<-data.frame(sum(srednie[16,2:11]))
+koszyk_zachodniopomorskie<-data.frame(sum(srednie[17,2:11]))
+
+#wykresy średnich
+#Mleko_3.5proc 
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Mleko_3.5proc)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena litra mleka o zaw. tłuszczu 3.5% (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Mleko_3.5proc)) +
+  geom_bar(stat = 'identity', fill="white") +
+  ggtitle("Średnia cena litra mleka o zaw. tłuszczu 3.5% (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+ 
+#Mleko_2.5proc
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Mleko_2.5proc)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena litra mleka o zaw. tłuszczu 2.5% (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = woj, 
+           y = sr_Mleko_2.5proc)) +
+  geom_bar(stat = 'identity', fill="white") +
+  ggtitle("Średnia cena litra mleka o zaw. tłuszczu 2.5% (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Ser_twarogowy
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ser_twarogowy)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena kilograma sera twarogowego półtłustego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ser_twarogowy)) +
+  geom_bar(stat = 'identity', fill="white") +
+  ggtitle("Średnia cena sera kilograma sera twarogowego półtłustego (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Ser_dojrzewajacy
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ser_twarogowy)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena kilograma sera dojrzewającego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ser_twarogowy)) +
+  geom_bar(stat = 'identity', fill="yellow") +
+  ggtitle("Średnia cena kilograma sera dojrzewającego (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Jajka
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Jajka)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena jajek za 1 szt. (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Jajka)) +
+  geom_bar(stat = 'identity', fill="orange") +
+  ggtitle("Średnia cena jajek za 1 szt. (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  
+#Jablka
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Jablka)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena kilograma jabłek (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Jablka)) +
+  geom_bar(stat = 'identity', fill="red") +
+  ggtitle("Średnia cena kilograma jabłek (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Ziemniaki
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ziemniaki)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena kilograma ziemniaków (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ziemniaki)) +
+  geom_bar(stat = 'identity', fill="brown") +
+  ggtitle("Średnia cena kilograma ziemniaków (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Koszulka
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Koszulka)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena koszulki (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Jablka)) +
+  geom_bar(stat = 'identity', fill="blue") +
+  ggtitle("Średnia cena koszulki (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Woda
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Woda)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena metra sześciennego wody (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Woda)) +
+  geom_bar(stat = 'identity', fill="grey") +
+  ggtitle("Średnia cena metra sześciennego wody (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Wegiel_kamienny
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Wegiel_kamienny)) + 
+  geom_point(color = 'blue', 
+             size = 1, 
+             shape = 15) +
+  ggtitle("Średnia cena tony węgla kamiennego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = srednie, 
+       aes(x = Wojewodztwa, 
+           y = sr_Wegiel_kamienny)) +
+  geom_bar(stat = 'identity', fill="black") +
+  ggtitle("Średnia cena tony węgla kamiennego (w zł)")+
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+
+#odchylenie standardowe w poszczególnych województwach
+sd_Mleko_3.5proc<-tapply(dane[,5],dane[,1],sd)
+sd_Mleko_2.5proc<-tapply(dane[,6],dane[,1],sd)
+sd_Ser_twarogowy<-tapply(dane[,7],dane[,1],sd)
+sd_Ser_dojrzewajacy<-tapply(dane[,8],dane[,1],sd)
+sd_Jajka<-tapply(dane[,9],dane[,1],sd)
+sd_Jablka<-tapply(dane[,10],dane[,1],sd)
+sd_Ziemniaki<-tapply(dane[,11],dane[,1],sd)
+sd_Koszulka<-tapply(dane[,12],dane[,1],sd)
+sd_Woda<-tapply(dane[,13],dane[,1],sd)
+sd_Wegiel_kamienny<-tapply(dane[,14],dane[,1],sd)
+
+#zestawienie odchyleń standardowych
+odchylenia<-data.frame(srednie,sd_Mleko_3.5proc=sd_Mleko_3.5proc, sd_Mleko_2.5proc=sd_Mleko_2.5proc,
+                       sd_Ser_twarogowy=sd_Ser_twarogowy, sd_Ser_dojrzewajacy=sd_Ser_dojrzewajacy, sd_Jajka=sd_Jajka, sd_Jablka=sd_Jablka,
+                       sd_Ziemniaki=sd_Ziemniaki, sd_Koszulka=sd_Koszulka, sd_Woda=sd_Woda, sd_Wegiel_kamienny=sd_Wegiel_kamienny)
+
+#wykresy odchyleń
+#Mleko_3.5proc
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Mleko_3.5proc)) + 
+  geom_errorbar(aes(ymin=sr_Mleko_3.5proc-sd_Mleko_3.5proc, 
+                    ymax=sr_Mleko_3.5proc+sd_Mleko_3.5proc), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1l mleka 3.5% (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Mleko_3.5proc)) +
+  geom_bar(stat = 'identity', fill="white") +
+  geom_errorbar(aes(ymin=sr_Mleko_3.5proc - sd_Mleko_3.5proc, ymax=sr_Mleko_3.5proc + sd_Mleko_3.5proc),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1l mleka 3.5% (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / LITR")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Mleko_2.5proc
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Mleko_2.5proc)) + 
+  geom_errorbar(aes(ymin=sr_Mleko_2.5proc-sd_Mleko_2.5proc, 
+                    ymax=sr_Mleko_2.5proc+sd_Mleko_2.5proc), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1l mleka 3.5% (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Mleko_2.5proc)) +
+  geom_bar(stat = 'identity', fill="white") +
+  geom_errorbar(aes(ymin=sr_Mleko_2.5proc - sd_Mleko_2.5proc, ymax=sr_Mleko_2.5proc + sd_Mleko_2.5proc),
+                width=.2,
+                col="darkred") + 
+  ggtitle("Średnia cena + odch. stand. 1l mleka 2.5% (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / LITR")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Ser_twarogowy 
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Ser_twarogowy)) + 
+  geom_errorbar(aes(ymin=sr_Ser_twarogowy-sd_Ser_twarogowy, 
+                    ymax=sr_Ser_twarogowy+sd_Ser_twarogowy), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1 kg sera twarogowego półtłustego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ser_twarogowy)) +
+  geom_bar(stat = 'identity', fill="white") +
+  geom_errorbar(aes(ymin=sr_Ser_twarogowy - sd_Ser_twarogowy, ymax=sr_Ser_twarogowy + sd_Ser_twarogowy),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1 kg sera twarogowego półtłustego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Ser_dojrzewajacy
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Ser_dojrzewajacy)) + 
+  geom_errorbar(aes(ymin=sr_Ser_dojrzewajacy-sd_Ser_dojrzewajacy, 
+                    ymax=sr_Ser_dojrzewajacy+sd_Ser_dojrzewajacy), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1 kg sera dojrzewającego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ser_dojrzewajacy)) +
+  geom_bar(stat = 'identity', fill="yellow") +
+  geom_errorbar(aes(ymin=sr_Ser_dojrzewajacy - sd_Ser_dojrzewajacy, ymax=sr_Ser_dojrzewajacy + sd_Ser_dojrzewajacy),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1 kg sera dojrzewającego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  theme_light()+
+  ylab("CENA   W   ZŁ / KG")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  
+#Jajka
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Jajka)) + 
+  geom_errorbar(aes(ymin=sr_Jajka-sd_Jajka, 
+                    ymax=sr_Jajka+sd_Jajka), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1 jajka (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Jajka)) +
+  geom_bar(stat = 'identity', fill="orange") +
+  geom_errorbar(aes(ymin=sr_Jajka - sd_Jajka, ymax=sr_Jajka + sd_Jajka),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1 jajka (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  theme_light()+
+  ylab("CENA   W   ZŁ / SZT.")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Jablka
+
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Jablka)) + 
+  geom_errorbar(aes(ymin=sr_Jablka-sd_Jablka, 
+                    ymax=sr_Jablka+sd_Jablka), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1 kg jabłek (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Jablka)) +
+  geom_bar(stat = 'identity', fill="red") +
+  geom_errorbar(aes(ymin=sr_Jablka - sd_Jablka, ymax=sr_Jablka + sd_Jablka),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1 kg jabłek (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  theme_light()+
+  ylab("CENA   W   ZŁ / KG")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Ziemniaki
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Ziemniaki)) + 
+  geom_errorbar(aes(ymin=sr_Ziemniaki-sd_Ziemniaki, 
+                    ymax=sr_Ziemniaki+sd_Ziemniaki), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1 kg ziemniaków (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Ziemniaki)) +
+  geom_bar(stat = 'identity', fill="brown") +
+  geom_errorbar(aes(ymin=sr_Ziemniaki - sd_Ziemniaki, ymax=sr_Ziemniaki + sd_Ziemniaki),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1 kg ziemniaków (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  theme_light()+
+  ylab("CENA   W   ZŁ / KG")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Koszulka
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Koszulka)) + 
+  geom_errorbar(aes(ymin=sr_Koszulka-sd_Koszulka, 
+                    ymax=sr_Koszulka+sd_Koszulka), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1 szt. koszulki (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Koszulka)) +
+  geom_bar(stat = 'identity', fill="blue") +
+  geom_errorbar(aes(ymin=sr_Koszulka - sd_Koszulka, ymax=sr_Koszulka + sd_Koszulka),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1 szt. koszulki (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  theme_light()+
+  ylab("CENA   W   ZŁ / SZT.")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  
+#Woda
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Woda)) + 
+  geom_errorbar(aes(ymin=sr_Woda-sd_Woda, 
+                    ymax=sr_Woda+sd_Woda), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1 m^3 wody (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Woda)) +
+  geom_bar(stat = 'identity', fill="grey") +
+  geom_errorbar(aes(ymin=sr_Woda - sd_Woda, ymax=sr_Woda + sd_Woda),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1 m^3 wody (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  theme_light()+
+  ylab("CENA   W   ZŁ / M^3")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Wegiel_kamienny
+ggplot(odchylenia, aes(x=Wojewodztwa, y=sr_Wegiel_kamienny)) + 
+  geom_errorbar(aes(ymin=sr_Wegiel_kamienny-sd_Wegiel_kamienny, 
+                    ymax=sr_Wegiel_kamienny+sd_Wegiel_kamienny), 
+                width=.1,
+                col="blue") +
+  geom_point(color = 'red', 
+             size = 1, 
+             shape = 15) + 
+  ggtitle("Średnia cena + odch. stand. 1 tony wegla kamiennego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+ggplot(data = odchylenia, 
+       aes(x = Wojewodztwa, 
+           y = sr_Wegiel_kamienny)) +
+  geom_bar(stat = 'identity', fill="black") +
+  geom_errorbar(aes(ymin=sr_Wegiel_kamienny - sd_Wegiel_kamienny, ymax=sr_Wegiel_kamienny + sd_Wegiel_kamienny),
+                width=.2,
+                col="darkblue") + 
+  ggtitle("Średnia cena + odch. stand. 1 tony węgla kamiennego (w zł)") +
+  xlab("WOJEWÓDZTWA")+
+  theme_light()+
+  ylab("CENA   W   ZŁ / TONA")+             
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#analiza cen dla Polski (lata 2006-2019)
+dim(dane)
+View(dane)
+
+polska <- dane[dane$woj == "Polska",]
+dim(polska)
+View(polska)
+str(polska)
+
+polska$data <- as.yearmon(paste(polska$mies, polska$rok)) 
+polska<-polska[order(polska$mies),]
+polska2006<-polska[polska$rok==2006,]
+polska2007<-polska[polska$rok==2007,]
+polska2008<-polska[polska$rok==2008,]
+polska2009<-polska[polska$rok==2009,]
+polska2010<-polska[polska$rok==2010,]
+polska2011<-polska[polska$rok==2011,]
+polska2012<-polska[polska$rok==2012,]
+polska2013<-polska[polska$rok==2013,]
+polska2014<-polska[polska$rok==2014,]
+polska2015<-polska[polska$rok==2015,]
+polska2016<-polska[polska$rok==2016,]
+polska2017<-polska[polska$rok==2017,]
+polska2018<-polska[polska$rok==2018,]
+polska2019<-polska[polska$rok==2019,]
+
+#zmiany cen produktów w czasie dla Polski
+#Mleko_3.5proc
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Mleko_3.5proc,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen mleka 3,5% w Polsce w latach 2006-2019") +
+  xlab("LATA")+
+  ylab("CENA")+
+  scale_x_yearmon() +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Mleko_2.5proc
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Mleko_2.5proc,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen mleka 2.5% w Polsce w latach 2006-2019") +
+  xlab("LATA")+
+  ylab("CENA")+
+  scale_x_yearmon() +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Ser_twarogowy
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Ser_twarogowy,
+           color =rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Zmiany cen 1kg sera twarogowego w Polsce w latach 2006-2019") +
+  xlab("LATA")+
+  ylab("CENA")+
+  scale_x_yearmon() +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Ser_dojrzewajacy
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Ser_dojrzewajacy,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen 1kg sera dojrzewającego w Polsce w latach 2006-2019") +
+  xlab("LATA")+
+  ylab("CENA")+
+  scale_x_yearmon() +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Jajka
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Jajka,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen sztuki jajka w Polsce w latach 2006-2019") +
+  xlab("LATA")+
+  ylab("CENA")+
+  scale_x_yearmon() +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Jablka
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Jablka,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen 1 kg jabłek Polsce w latach 2006-2019") +
+  xlab("LATA")+
+  ylab("CENA")+
+  scale_x_yearmon() +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Ziemniaki
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Ziemniaki,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen 1 kg ziemniakóW w Polsce w latach 2006-2019") +
+  scale_x_yearmon() +
+  xlab("LATA")+
+  ylab("CENA")+
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Koszulka
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Koszulka,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen 1 szt. koszulki w latach 2006-2019") +
+  scale_x_yearmon() +
+  xlab("LATA")+
+  ylab("CENA")+
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Woda
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Woda,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen m^3 wody w Polsce w latach 2006-2019") +
+  scale_x_yearmon() +
+  xlab("LATA")+
+  ylab("CENA")+
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+#Wegiel_kamienny
+ggplot(data = polska, 
+       aes(x = data, 
+           y = Wegiel_kamienny,
+           color =rok)) + 
+  geom_point(size = 4, 
+             shape = 16) +
+  ggtitle("Zmiany cen tony węgla kamiennego w Polsce w latach 2006-2019") +
+  xlab("LATA")+
+  ylab("CENA")+
+  scale_x_yearmon() +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+  
+#Przyjrzyjmy się jeszcze rozkładowi cen w miesiącach
+
+#Mleko 2.5%
+
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Mleko_3.5proc,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena jajek za sztukę") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Mleko_3.5proc, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+
+#Mleko 2.5%  
+  
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Mleko_2.5proc,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena litra mleka 2.5%") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Mleko_2.5proc, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+
+#Ser twarogowy półtłusty
+  
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Ser_twarogowy,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena sera twarogowego półtłustego") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Ser_twarogowy, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+
+#Ser dojrzewający
+  
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Ser_dojrzewajacy,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena sera dojrzewającego za 1 kg") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Ser_dojrzewajacy, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+ 
+#Jajka 
+  
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Jajka,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena jajek za sztukę") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Jajka, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+
+#Jabłka
+  
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Jablka,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena jabłek za 1 kg") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Jablka, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+
+#Ziemniaki
+  
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Ziemniaki,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena ziemniaków za 1 kg") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Ziemniaki, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+ 
+#Koszulka 
+  
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Koszulka,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena za sztukę koszulki") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Koszulka, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+
+#Woda
+  
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Woda,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena za metr sześcienny wody") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Woda, fill=mies)) + 
+  geom_boxplot(alpha=0.6)
+
+#Węgiel kamienny
+
+ggplot(data = polska, 
+       aes(x = mon, 
+           y = Wegiel_kamienny,
+           color =rok,
+           group=rok)) + 
+  geom_point(size = 5, 
+             shape = 15) +
+  ggtitle("Miesiąc / cena węgla kamiennego za tonę") +
+  scale_x_discrete( labels = c("sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = .5))
+
+ggplot(polska, aes(x=mon, y=Wegiel_kamienny, fill=mies)) + 
+  geom_boxplot(alpha=0.6)

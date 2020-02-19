@@ -1,0 +1,3793 @@
+library(zoo)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+
+tab<-read.csv(file="C:/Users/Chlastek/Desktop/danemojedrugieee.csv",sep=";",dec=",",encoding = "UTF-8")
+
+names(tab)[2]<-paste0("Wojewodztwo")
+names(tab)[3:16]<-paste0("Mleko_3.5proc_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[17:30]<-paste0("Mleko_2.5proc_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[31:44]<-paste0("Ser_twarogowy_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[45:58]<-paste0("Ser_dojrzewajacy_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[59:72]<-paste0("Jajka_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[73:86]<-paste0("Jablka_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[87:100]<-paste0("Ziemniaki_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[101:114]<-paste0("Koszulka_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[115:128]<-paste0("Woda_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+names(tab)[129:142]<-paste0("Wegiel_kamienny_",c("Styczen_2006","Styczen_2007","Styczen_2008","Styczen_2009","Styczen_2010","Styczen_2011","Styczen_2012","Styczen_2013","Styczen_2014","Styczen_2015","Styczen_2016","Styczen_2017","Styczen_2018","Styczen_2019"))
+
+names(tab)[143:156]<-paste0("Mleko_3.5proc_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[157:170]<-paste0("Mleko_2.5proc_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[171:184]<-paste0("Ser_twarogowy_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[185:198]<-paste0("Ser_dojrzewajacy_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[199:212]<-paste0("Jajka_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[213:226]<-paste0("Jablka_,",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[227:240]<-paste0("Ziemniaki_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[241:254]<-paste0("Koszulka_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[255:268]<-paste0("Woda_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+names(tab)[269:282]<-paste0("Wegiel_kamienny_",c("Luty_2006","Luty_2007","Luty_2008","Luty_2009","Luty_2010","Luty_2011","Luty_2012","Luty_2013","Luty_2014","Luty_2015","Luty_2016","Luty_2017","Luty_2018","Luty_2019"))
+
+names(tab)[283:296]<-paste0("Mleko_3.5proc_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[297:310]<-paste0("Mleko_2.5proc_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[311:324]<-paste0("Ser_twarogowy_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[325:338]<-paste0("Ser_dojrzewajacy_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[339:352]<-paste0("Jajka_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[353:366]<-paste0("Jablka_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[367:380]<-paste0("Ziemniaki_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[381:394]<-paste0("Koszulka_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[395:408]<-paste0("Woda_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+names(tab)[409:422]<-paste0("Wegiel_kamienny_",c("Marzec_2006","Marzec_2007","Marzec_2008","Marzec_2009","Marzec_2010","Marzec_2011","Marzec_2012","Marzec_2013","Marzec_2014","Marzec_2015","Marzec_2016","Marzec_2017","Marzec_2018","Marzec_2019"))
+
+names(tab)[423:436]<-paste0("Mleko_3.5proc_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[437:450]<-paste0("Mleko_2.5proc_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[451:464]<-paste0("Ser_twarogow_y",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[465:478]<-paste0("Ser_dojrzewajacy_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[479:492]<-paste0("Jajka_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[493:506]<-paste0("Jablka_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[507:520]<-paste0("Ziemniaki_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[521:534]<-paste0("Koszulka_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[535:548]<-paste0("Woda_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+names(tab)[549:562]<-paste0("Wegiel_kamienny_",c("Kwiecien_2006","Kwiecien_2007","Kwiecien_2008","Kwiecien_2009","Kwiecien_2010","Kwiecien_2011","Kwiecien_2012","Kwiecien_2013","Kwiecien_2014","Kwiecien_2015","Kwiecien_2016","Kwiecien_2017","Kwiecien_2018","Kwiecien_2019"))
+
+names(tab)[563:576]<-paste0("Mleko_3.5proc_",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[577:590]<-paste0("Mleko_2.5proc_",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[591:604]<-paste0("Ser_twarogowy_",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[605:618]<-paste0("Ser_dojrzewajacy-",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[619:632]<-paste0("Jajka_",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[633:646]<-paste0("Jablka_",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[647:660]<-paste0("Ziemniaki-",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[661:674]<-paste0("Koszulka_",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[675:688]<-paste0("Woda_",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+names(tab)[689:702]<-paste0("Wegiel_kamienny_",c("Maj_2006","Maj_2007","Maj_2008","Maj_2009","Maj_2010","Maj_2011","Maj_2012","Maj_2013","Maj_2014","Maj_2015","Maj_2016","Maj_2017","Maj_2018","Maj_2019"))
+
+names(tab)[703:716]<-paste0("Mleko_3.5proc_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[717:730]<-paste0("Mleko_2.5proc_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[731:744]<-paste0("Ser_twarogowy_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[745:758]<-paste0("Ser_dojrzewajacy_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[759:772]<-paste0("Jajka_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[773:786]<-paste0("Jablka_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[787:800]<-paste0("Ziemniaki_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[801:814]<-paste0("Koszulka_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[815:828]<-paste0("Woda_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+names(tab)[829:842]<-paste0("Wegiel_kamienny_",c("Czerwiec_2006","Czerwiec_2007","Czerwiec_2008","Czerwiec_2009","Czerwiec_2010","Czerwiec_2011","Czerwiec_2012","Czerwiec_2013","Czerwiec_2014","Czerwiec_2015","Czerwiec_2016","Czerwiec_2017","Czerwiec_2018","Czerwiec_2019"))
+
+
+names(tab)[843:856]<-paste0("Mleko_3.5%_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[857:870]<-paste0("Mleko_2.5%_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[871:884]<-paste0("Ser_twarogowy_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[885:898]<-paste0("Ser_dojrzewajacy_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[899:912]<-paste0("Jajka_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[913:926]<-paste0("Jablka_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[927:940]<-paste0("Ziemniaki_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[941:954]<-paste0("Koszulka_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[955:968]<-paste0("Woda_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+names(tab)[969:982]<-paste0("Wegiel_kamienny_",c("Lipiec_2006","Lipiec_2007","Lipiec_2008","Lipiec_2009","Lipiec_2010","Lipiec_2011","Lipiec_2012","Lipiec_2013","Lipiec_2014","Lipiec_2015","Lipiec_2016","Lipiec_2017","Lipiec_2018","Lipiec_2019"))
+
+
+names(tab)[983:996]<-paste0("Mleko_3.5proc_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[997:1010]<-paste0("Mleko_2.5proc_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[1011:1024]<-paste0("Ser_twarogowy_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[1025:1038]<-paste0("Ser_dojrzewajacy_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[1039:1052]<-paste0("Jajka",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[1053:1066]<-paste0("Jablka_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[1067:1080]<-paste0("Ziemniaki_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[1081:1094]<-paste0("Koszulka_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[1095:1108]<-paste0("Woda_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+names(tab)[1109:1122]<-paste0("Wegiel_kamienny_",c("Sierpień_2006","Sierpień_2007","Sierpień_2008","Sierpień_2009","Sierpień_2010","Sierpień_2011","Sierpień_2012","Sierpień_2013","Sierpień_2014","Sierpień_2015","Sierpień_2016","Sierpień_2017","Sierpień_2018","Sierpień_2019"))
+
+
+names(tab)[1123:1136]<-paste0("Mleko_3.5proc_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1137:1150]<-paste0("Mleko_2.5proc_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1151:1164]<-paste0("Ser_twarogowy_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1165:1178]<-paste0("Ser_dojrzewajacy_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1179:1192]<-paste0("Jajka_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1193:1206]<-paste0("Jablka_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1207:1220]<-paste0("Ziemniaki_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1221:1234]<-paste0("Koszulka_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1235:1248]<-paste0("Woda_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+names(tab)[1249:1262]<-paste0("Wegiel_kamienny_",c("Wrzesień_2006","Wrzesień_2007","Wrzesień_2008","Wrzesień_2009","Wrzesień_2010","Wrzesień_2011","Wrzesień_2012","Wrzesień_2013","Wrzesień_2014","Wrzesień_2015","Wrzesień_2016","Wrzesień_2017","Wrzesień_2018","Wrzesień_2019"))
+
+
+names(tab)[1263:1276]<-paste0("Mleko_3.5proc_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1277:1290]<-paste0("Mleko-_2.5proc_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1291:1304]<-paste0("Ser_twarogowy_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1305:1318]<-paste0("Ser_dojrzewajacy_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1319:1332]<-paste0("Jajka_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1333:1346]<-paste0("Jablka_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1347:1360]<-paste0("Ziemniaki_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1361:1374]<-paste0("Koszulka_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1375:1388]<-paste0("Woda_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+names(tab)[1389:1402]<-paste0("Wegiel_kamienny_",c("Październik_2006","Paźdzeirnik_2007","Październik_2008","Październik_2009","Październik_2010","Październik_2011","Październik_2012","Październik_2013","Październik_2014","Październik_2015","Październik_2016","Październik_2017","Październik_2018","Październik_2019"))
+
+
+names(tab)[1403:1416]<-paste0("Mleko_3.5proc_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopadc_2018","Listopad_2019"))
+names(tab)[1417:1430]<-paste0("Mleko_2.5proc_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopadc_2018","Listopad_2019"))
+names(tab)[1431:1444]<-paste0("Ser_twarogowy_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopadc_2018","Listopad_2019"))
+names(tab)[1445:1458]<-paste0("Ser_dojrzewajacy_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopadc_2018","Listopad_2019"))
+names(tab)[1459:1472]<-paste0("Jajka_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopad_2018","Listopad_2019"))
+names(tab)[1473:1486]<-paste0("Jablka_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopad_2018","Listopad_2019"))
+names(tab)[1487:1500]<-paste0("Ziemniaki_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopad_2018","Listopad_2019"))
+names(tab)[1501:1514]<-paste0("Koszulka_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopad_2018","Listopad_2019"))
+names(tab)[1515:1528]<-paste0("Woda_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopad_2018","Listopad_2019"))
+names(tab)[1529:1542]<-paste0("Wegiel_kamienny_",c("Listopad_2006","Listopad_2007","Listopad_2008","Listopad_2009","Listopad_2010","Listopad_2011","Listopad_2012","Listopad_2013","Listopad_2014","Listopad_2015","Listopad_2016","Listopad_2017","Listopad_2018","Listopad_2019"))
+
+names(tab)[1543:1556]<-paste0("Mleko_3.5proc_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1557:1570]<-paste0("Mleko_2.5proc_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1571:1584]<-paste0("Ser_twarogowy_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1585:1598]<-paste0("Ser_dojrzewajacy_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1599:1612]<-paste0("Jajka_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1613:1626]<-paste0("Jablka_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1627:1640]<-paste0("Ziemniaki_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1641:1654]<-paste0("Koszulka_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1655:1668]<-paste0("Woda_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+names(tab)[1669:1682]<-paste0("Wegiel_kamienny_",c("Grudzień_2006","Grudzień_2007","Grudzień_2008","Grudzień_2009","Grudzień_2010","Grudzień_2011","Grudzień_2012","Grudzień_2013","Grudzień_2014","Grudzień_2015","Grudzień_2016","Grudzień_2017","Grudzień_2018","Grudzień_2019"))
+
+  #Stycznie
+
+
+
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Styczen_2019),
+            "2018" = mean(Mleko_3.5proc_Styczen_2018),
+            "2017" = mean(Mleko_3.5proc_Styczen_2017),
+            "2016" = mean(Mleko_3.5proc_Styczen_2016),
+            "2015" = mean(Mleko_3.5proc_Styczen_2015),
+            "2014" = mean(Mleko_3.5proc_Styczen_2014),
+            "2013" = mean(Mleko_3.5proc_Styczen_2013),
+            "2012" = mean(Mleko_3.5proc_Styczen_2012),
+            "2011" = mean(Mleko_3.5proc_Styczen_2011),
+            "2010" = mean(Mleko_3.5proc_Styczen_2010),
+            "2009" = mean(Mleko_3.5proc_Styczen_2009),
+            "2008" = mean(Mleko_3.5proc_Styczen_2008),
+            "2007" = mean(Mleko_3.5proc_Styczen_2007),
+            "2006" = mean(Mleko_3.5proc_Styczen_2006))
+
+sr1<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Styczen, cena)
+
+ggplot(sr1,aes(x =średnia_Mleko_3.5proc_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Styczen_2019),
+            "2018" = mean(Mleko_2.5proc_Styczen_2018),
+            "2017" = mean(Mleko_2.5proc_Styczen_2017),
+            "2016" = mean(Mleko_2.5proc_Styczen_2016),
+            "2015" = mean(Mleko_2.5proc_Styczen_2015),
+            "2014" = mean(Mleko_2.5proc_Styczen_2014),
+            "2013" = mean(Mleko_2.5proc_Styczen_2013),
+            "2012" = mean(Mleko_2.5proc_Styczen_2012),
+            "2011" = mean(Mleko_2.5proc_Styczen_2011),
+            "2010" = mean(Mleko_2.5proc_Styczen_2010),
+            "2009" = mean(Mleko_2.5proc_Styczen_2009),
+            "2008" = mean(Mleko_2.5proc_Styczen_2008),
+            "2007" = mean(Mleko_2.5proc_Styczen_2007),
+            "2006" = mean(Mleko_2.5proc_Styczen_2006))
+
+sr2<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Styczen, cena)
+
+ggplot(sr2,aes(x =średnia_Mleko_2.5proc_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 2,5% w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+                
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Styczen_2019),
+            "2018" = mean(Ser_twarogowy_Styczen_2018),
+            "2017" = mean(Ser_twarogowy_Styczen_2017),
+            "2016" = mean(Ser_twarogowy_Styczen_2016),
+            "2015" = mean(Ser_twarogowy_Styczen_2015),
+            "2014" = mean(Ser_twarogowy_Styczen_2014),
+            "2013" = mean(Ser_twarogowy_Styczen_2013),
+            "2012" = mean(Ser_twarogowy_Styczen_2012),
+            "2011" = mean(Ser_twarogowy_Styczen_2011),
+            "2010" = mean(Ser_twarogowy_Styczen_2010),
+            "2009" = mean(Ser_twarogowy_Styczen_2009),
+            "2008" = mean(Ser_twarogowy_Styczen_2008),
+            "2007" = mean(Ser_twarogowy_Styczen_2007),
+            "2006" = mean(Ser_twarogowy_Styczen_2006))
+
+sr3<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Styczen, cena)
+
+
+
+ggplot(sr3,aes(x =średnia_Ser_twarogowy_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Styczen_2019),
+            "2018" = mean(Ser_dojrzewajacy_Styczen_2018),
+            "2017" = mean(Ser_dojrzewajacy_Styczen_2017),
+            "2016" = mean(Ser_dojrzewajacy_Styczen_2016),
+            "2015" = mean(Ser_dojrzewajacy_Styczen_2015),
+            "2014" = mean(Ser_dojrzewajacy_Styczen_2014),
+            "2013" = mean(Ser_dojrzewajacy_Styczen_2013),
+            "2012" = mean(Ser_dojrzewajacy_Styczen_2012),
+            "2011" = mean(Ser_dojrzewajacy_Styczen_2011),
+            "2010" = mean(Ser_dojrzewajacy_Styczen_2010),
+            "2009" = mean(Ser_dojrzewajacy_Styczen_2009),
+            "2008" = mean(Ser_dojrzewajacy_Styczen_2008),
+            "2007" = mean(Ser_dojrzewajacy_Styczen_2007),
+            "2006" = mean(Ser_dojrzewajacy_Styczen_2006))
+
+sr4<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Styczen, cena)
+
+
+
+ggplot(sr4,aes(x =średnia_Ser_dojrzewajacy_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Styczen_2019),
+            "2018" = mean(Jablka_Styczen_2018),
+            "2017" = mean(Jablka_Styczen_2017),
+            "2016" = mean(Jablka_Styczen_2016),
+            "2015" = mean(Jablka_Styczen_2015),
+            "2014" = mean(Jablka_Styczen_2014),
+            "2013" = mean(Jablka_Styczen_2013),
+            "2012" = mean(Jablka_Styczen_2012),
+            "2011" = mean(Jablka_Styczen_2011),
+            "2010" = mean(Jablka_Styczen_2010),
+            "2009" = mean(Jablka_Styczen_2009),
+            "2008" = mean(Jablka_Styczen_2008),
+            "2007" = mean(Jablka_Styczen_2007),
+            "2006" = mean(Jablka_Styczen_2006))
+
+sr5<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Styczen, cena)
+
+
+
+ggplot(sr5,aes(x =średnia_Jablka_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Styczen_2019),
+            "2018" = mean(Jajka_Styczen_2018),
+            "2017" = mean(Jajka_Styczen_2017),
+            "2016" = mean(Jajka_Styczen_2016),
+            "2015" = mean(Jajka_Styczen_2015),
+            "2014" = mean(Jajka_Styczen_2014),
+            "2013" = mean(Jajka_Styczen_2013),
+            "2012" = mean(Jajka_Styczen_2012),
+            "2011" = mean(Jajka_Styczen_2011),
+            "2010" = mean(Jajka_Styczen_2010),
+            "2009" = mean(Jajka_Styczen_2009),
+            "2008" = mean(Jajka_Styczen_2008),
+            "2007" = mean(Jajka_Styczen_2007),
+            "2006" = mean(Jajka_Styczen_2006))
+
+sr6<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Styczen, cena)
+
+
+ggplot(sr6,aes(x =średnia_Jajka_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Styczen_2019),
+            "2018" = mean(Ziemniaki_Styczen_2018),
+            "2017" = mean(Ziemniaki_Styczen_2017),
+            "2016" = mean(Ziemniaki_Styczen_2016),
+            "2015" = mean(Ziemniaki_Styczen_2015),
+            "2014" = mean(Ziemniaki_Styczen_2014),
+            "2013" = mean(Ziemniaki_Styczen_2013),
+            "2012" = mean(Ziemniaki_Styczen_2012),
+            "2011" = mean(Ziemniaki_Styczen_2011),
+            "2010" = mean(Ziemniaki_Styczen_2010),
+            "2009" = mean(Ziemniaki_Styczen_2009),
+            "2008" = mean(Ziemniaki_Styczen_2008),
+            "2007" = mean(Ziemniaki_Styczen_2007),
+            "2006" = mean(Ziemniaki_Styczen_2006))
+
+sr7<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Styczen, cena)
+
+ggplot(sr7,aes(x =średnia_Ziemniaki_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Styczen_2019),
+            "2018" = mean(Koszulka_Styczen_2018),
+            "2017" = mean(Koszulka_Styczen_2017),
+            "2016" = mean(Koszulka_Styczen_2016),
+            "2015" = mean(Koszulka_Styczen_2015),
+            "2014" = mean(Koszulka_Styczen_2014),
+            "2013" = mean(Koszulka_Styczen_2013),
+            "2012" = mean(Koszulka_Styczen_2012),
+            "2011" = mean(Koszulka_Styczen_2011),
+            "2010" = mean(Koszulka_Styczen_2010),
+            "2009" = mean(Koszulka_Styczen_2009),
+            "2008" = mean(Koszulka_Styczen_2008),
+            "2007" = mean(Koszulka_Styczen_2007),
+            "2006" = mean(Koszulka_Styczen_2006))
+
+sr8<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Styczen, cena)
+
+
+ggplot(sr8,aes(x =średnia_Koszulka_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Styczen_2019),
+            "2018" = mean(Woda_Styczen_2018),
+            "2017" = mean(Woda_Styczen_2017),
+            "2016" = mean(Woda_Styczen_2016),
+            "2015" = mean(Woda_Styczen_2015),
+            "2014" = mean(Woda_Styczen_2014),
+            "2013" = mean(Woda_Styczen_2013),
+            "2012" = mean(Woda_Styczen_2012),
+            "2011" = mean(Woda_Styczen_2011),
+            "2010" = mean(Woda_Styczen_2010),
+            "2009" = mean(Woda_Styczen_2009),
+            "2008" = mean(Woda_Styczen_2008),
+            "2007" = mean(Woda_Styczen_2007),
+            "2006" = mean(Woda_Styczen_2006))
+
+sr9<-gather(round(Sr_Woda, digits=2), średnia_Woda_Styczen, cena)
+
+
+
+ggplot(sr9,aes(x =średnia_Woda_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Styczen_2019),
+            "2018" = mean(Wegiel_kamienny_Styczen_2018),
+            "2017" = mean(Wegiel_kamienny_Styczen_2017),
+            "2016" = mean(Wegiel_kamienny_Styczen_2016),
+            "2015" = mean(Wegiel_kamienny_Styczen_2015),
+            "2014" = mean(Wegiel_kamienny_Styczen_2014),
+            "2013" = mean(Wegiel_kamienny_Styczen_2013),
+            "2012" = mean(Wegiel_kamienny_Styczen_2012),
+            "2011" = mean(Wegiel_kamienny_Styczen_2011),
+            "2010" = mean(Wegiel_kamienny_Styczen_2010),
+            "2009" = mean(Wegiel_kamienny_Styczen_2009),
+            "2008" = mean(Wegiel_kamienny_Styczen_2008),
+            "2007" = mean(Wegiel_kamienny_Styczen_2007),
+            "2006" = mean(Wegiel_kamienny_Styczen_2006))
+
+sr10<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Styczen, cena)
+
+ggplot(sr10,aes(x =średnia_Wegiel_kamienny_Styczen, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w styczniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+ #Lute
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Luty_2019),
+            "2018" = mean(Mleko_3.5proc_Luty_2018),
+            "2017" = mean(Mleko_3.5proc_Luty_2017),
+            "2016" = mean(Mleko_3.5proc_Luty_2016),
+            "2015" = mean(Mleko_3.5proc_Luty_2015),
+            "2014" = mean(Mleko_3.5proc_Luty_2014),
+            "2013" = mean(Mleko_3.5proc_Luty_2013),
+            "2012" = mean(Mleko_3.5proc_Luty_2012),
+            "2011" = mean(Mleko_3.5proc_Luty_2011),
+            "2010" = mean(Mleko_3.5proc_Luty_2010),
+            "2009" = mean(Mleko_3.5proc_Luty_2009),
+            "2008" = mean(Mleko_3.5proc_Luty_2008),
+            "2007" = mean(Mleko_3.5proc_Luty_2007),
+            "2006" = mean(Mleko_3.5proc_Luty_2006))
+
+sr11<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Luty, cena)
+
+ggplot(sr11,aes(x =średnia_Mleko_3.5proc_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1)) 
+        
+        
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Luty_2019),
+            "2018" = mean(Mleko_2.5proc_Luty_2018),
+            "2017" = mean(Mleko_2.5proc_Luty_2017),
+            "2016" = mean(Mleko_2.5proc_Luty_2016),
+            "2015" = mean(Mleko_2.5proc_Luty_2015),
+            "2014" = mean(Mleko_2.5proc_Luty_2014),
+            "2013" = mean(Mleko_2.5proc_Luty_2013),
+            "2012" = mean(Mleko_2.5proc_Luty_2012),
+            "2011" = mean(Mleko_2.5proc_Luty_2011),
+            "2010" = mean(Mleko_2.5proc_Luty_2010),
+            "2009" = mean(Mleko_2.5proc_Luty_2009),
+            "2008" = mean(Mleko_2.5proc_Luty_2008),
+            "2007" = mean(Mleko_2.5proc_Luty_2007),
+            "2006" = mean(Mleko_2.5proc_Luty_2006))
+
+sr12<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Luty, cena)
+
+ggplot(sr12,aes(x =średnia_Mleko_2.5proc_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Luty_2019),
+            "2018" = mean(Ser_twarogowy_Luty_2018),
+            "2017" = mean(Ser_twarogowy_Luty_2017),
+            "2016" = mean(Ser_twarogowy_Luty_2016),
+            "2015" = mean(Ser_twarogowy_Luty_2015),
+            "2014" = mean(Ser_twarogowy_Luty_2014),
+            "2013" = mean(Ser_twarogowy_Luty_2013),
+            "2012" = mean(Ser_twarogowy_Luty_2012),
+            "2011" = mean(Ser_twarogowy_Luty_2011),
+            "2010" = mean(Ser_twarogowy_Luty_2010),
+            "2009" = mean(Ser_twarogowy_Luty_2009),
+            "2008" = mean(Ser_twarogowy_Luty_2008),
+            "2007" = mean(Ser_twarogowy_Luty_2007),
+            "2006" = mean(Ser_twarogowy_Luty_2006))
+
+sr13<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Luty, cena)
+
+
+
+ggplot(sr13,aes(x =średnia_Ser_twarogowy_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Luty_2019),
+            "2018" = mean(Ser_dojrzewajacy_Luty_2018),
+            "2017" = mean(Ser_dojrzewajacy_Luty_2017),
+            "2016" = mean(Ser_dojrzewajacy_Luty_2016),
+            "2015" = mean(Ser_dojrzewajacy_Luty_2015),
+            "2014" = mean(Ser_dojrzewajacy_Luty_2014),
+            "2013" = mean(Ser_dojrzewajacy_Luty_2013),
+            "2012" = mean(Ser_dojrzewajacy_Luty_2012),
+            "2011" = mean(Ser_dojrzewajacy_Luty_2011),
+            "2010" = mean(Ser_dojrzewajacy_Luty_2010),
+            "2009" = mean(Ser_dojrzewajacy_Luty_2009),
+            "2008" = mean(Ser_dojrzewajacy_Luty_2008),
+            "2007" = mean(Ser_dojrzewajacy_Luty_2007),
+            "2006" = mean(Ser_dojrzewajacy_Luty_2006))
+
+sr14<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Luty, cena)
+
+
+
+ggplot(sr14,aes(x =średnia_Ser_dojrzewajacy_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Luty_2019),
+            "2018" = mean(Jablka_Luty_2018),
+            "2017" = mean(Jablka_Luty_2017),
+            "2016" = mean(Jablka_Luty_2016),
+            "2015" = mean(Jablka_Luty_2015),
+            "2014" = mean(Jablka_Luty_2014),
+            "2013" = mean(Jablka_Luty_2013),
+            "2012" = mean(Jablka_Luty_2012),
+            "2011" = mean(Jablka_Luty_2011),
+            "2010" = mean(Jablka_Luty_2010),
+            "2009" = mean(Jablka_Luty_2009),
+            "2008" = mean(Jablka_Luty_2008),
+            "2007" = mean(Jablka_Luty_2007),
+            "2006" = mean(Jablka_Luty_2006))
+
+sr15<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Luty, cena)
+
+
+
+ggplot(sr15,aes(x =średnia_Jablka_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Luty_2019),
+            "2018" = mean(Jajka_Luty_2018),
+            "2017" = mean(Jajka_Luty_2017),
+            "2016" = mean(Jajka_Luty_2016),
+            "2015" = mean(Jajka_Luty_2015),
+            "2014" = mean(Jajka_Luty_2014),
+            "2013" = mean(Jajka_Luty_2013),
+            "2012" = mean(Jajka_Luty_2012),
+            "2011" = mean(Jajka_Luty_2011),
+            "2010" = mean(Jajka_Luty_2010),
+            "2009" = mean(Jajka_Luty_2009),
+            "2008" = mean(Jajka_Luty_2008),
+            "2007" = mean(Jajka_Luty_2007),
+            "2006" = mean(Jajka_Luty_2006))
+
+sr16<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Luty, cena)
+
+
+ggplot(sr16,aes(x =średnia_Jajka_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Luty_2019),
+            "2018" = mean(Ziemniaki_Luty_2018),
+            "2017" = mean(Ziemniaki_Luty_2017),
+            "2016" = mean(Ziemniaki_Luty_2016),
+            "2015" = mean(Ziemniaki_Luty_2015),
+            "2014" = mean(Ziemniaki_Luty_2014),
+            "2013" = mean(Ziemniaki_Luty_2013),
+            "2012" = mean(Ziemniaki_Luty_2012),
+            "2011" = mean(Ziemniaki_Luty_2011),
+            "2010" = mean(Ziemniaki_Luty_2010),
+            "2009" = mean(Ziemniaki_Luty_2009),
+            "2008" = mean(Ziemniaki_Luty_2008),
+            "2007" = mean(Ziemniaki_Luty_2007),
+            "2006" = mean(Ziemniaki_Luty_2006))
+
+sr17<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Luty, cena)
+
+ggplot(sr17,aes(x =średnia_Ziemniaki_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Luty_2019),
+            "2018" = mean(Koszulka_Luty_2018),
+            "2017" = mean(Koszulka_Luty_2017),
+            "2016" = mean(Koszulka_Luty_2016),
+            "2015" = mean(Koszulka_Luty_2015),
+            "2014" = mean(Koszulka_Luty_2014),
+            "2013" = mean(Koszulka_Luty_2013),
+            "2012" = mean(Koszulka_Luty_2012),
+            "2011" = mean(Koszulka_Luty_2011),
+            "2010" = mean(Koszulka_Luty_2010),
+            "2009" = mean(Koszulka_Luty_2009),
+            "2008" = mean(Koszulka_Luty_2008),
+            "2007" = mean(Koszulka_Luty_2007),
+            "2006" = mean(Koszulka_Luty_2006))
+
+sr18<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Luty, cena)
+
+
+ggplot(sr18,aes(x =średnia_Koszulka_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Luty_2019),
+            "2018" = mean(Woda_Luty_2018),
+            "2017" = mean(Woda_Luty_2017),
+            "2016" = mean(Woda_Luty_2016),
+            "2015" = mean(Woda_Luty_2015),
+            "2014" = mean(Woda_Luty_2014),
+            "2013" = mean(Woda_Luty_2013),
+            "2012" = mean(Woda_Luty_2012),
+            "2011" = mean(Woda_Luty_2011),
+            "2010" = mean(Woda_Luty_2010),
+            "2009" = mean(Woda_Luty_2009),
+            "2008" = mean(Woda_Luty_2008),
+            "2007" = mean(Woda_Luty_2007),
+            "2006" = mean(Woda_Luty_2006))
+
+sr19<-gather(round(Sr_Woda, digits=2), średnia_Woda_Luty, cena)
+
+
+
+ggplot(sr19,aes(x =średnia_Woda_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Luty_2019),
+            "2018" = mean(Wegiel_kamienny_Luty_2018),
+            "2017" = mean(Wegiel_kamienny_Luty_2017),
+            "2016" = mean(Wegiel_kamienny_Luty_2016),
+            "2015" = mean(Wegiel_kamienny_Luty_2015),
+            "2014" = mean(Wegiel_kamienny_Luty_2014),
+            "2013" = mean(Wegiel_kamienny_Luty_2013),
+            "2012" = mean(Wegiel_kamienny_Luty_2012),
+            "2011" = mean(Wegiel_kamienny_Luty_2011),
+            "2010" = mean(Wegiel_kamienny_Luty_2010),
+            "2009" = mean(Wegiel_kamienny_Luty_2009),
+            "2008" = mean(Wegiel_kamienny_Luty_2008),
+            "2007" = mean(Wegiel_kamienny_Luty_2007),
+            "2006" = mean(Wegiel_kamienny_Luty_2006))
+
+sr20<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Luty, cena)
+
+
+
+ggplot(sr20,aes(x =średnia_Wegiel_kamienny_Luty, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w lutych 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+        
+  #Marce
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Marzec_2019),
+            "2018" = mean(Mleko_3.5proc_Marzec_2018),
+            "2017" = mean(Mleko_3.5proc_Marzec_2017),
+            "2016" = mean(Mleko_3.5proc_Marzec_2016),
+            "2015" = mean(Mleko_3.5proc_Marzec_2015),
+            "2014" = mean(Mleko_3.5proc_Marzec_2014),
+            "2013" = mean(Mleko_3.5proc_Marzec_2013),
+            "2012" = mean(Mleko_3.5proc_Marzec_2012),
+            "2011" = mean(Mleko_3.5proc_Marzec_2011),
+            "2010" = mean(Mleko_3.5proc_Marzec_2010),
+            "2009" = mean(Mleko_3.5proc_Marzec_2009),
+            "2008" = mean(Mleko_3.5proc_Marzec_2008),
+            "2007" = mean(Mleko_3.5proc_Marzec_2007),
+            "2006" = mean(Mleko_3.5proc_Marzec_2006))
+
+sr21<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Marzec, cena)
+
+ggplot(sr21,aes(x =średnia_Mleko_3.5proc_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Marzec_2019),
+            "2018" = mean(Mleko_2.5proc_Marzec_2018),
+            "2017" = mean(Mleko_2.5proc_Marzec_2017),
+            "2016" = mean(Mleko_2.5proc_Marzec_2016),
+            "2015" = mean(Mleko_2.5proc_Marzec_2015),
+            "2014" = mean(Mleko_2.5proc_Marzec_2014),
+            "2013" = mean(Mleko_2.5proc_Marzec_2013),
+            "2012" = mean(Mleko_2.5proc_Marzec_2012),
+            "2011" = mean(Mleko_2.5proc_Marzec_2011),
+            "2010" = mean(Mleko_2.5proc_Marzec_2010),
+            "2009" = mean(Mleko_2.5proc_Marzec_2009),
+            "2008" = mean(Mleko_2.5proc_Marzec_2008),
+            "2007" = mean(Mleko_2.5proc_Marzec_2007),
+            "2006" = mean(Mleko_2.5proc_Marzec_2006))
+
+sr22<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Marzec, cena)
+
+ggplot(sr22,aes(x =średnia_Mleko_2.5proc_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+      
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Marzec_2019),
+            "2018" = mean(Ser_twarogowy_Marzec_2018),
+            "2017" = mean(Ser_twarogowy_Marzec_2017),
+            "2016" = mean(Ser_twarogowy_Marzec_2016),
+            "2015" = mean(Ser_twarogowy_Marzec_2015),
+            "2014" = mean(Ser_twarogowy_Marzec_2014),
+            "2013" = mean(Ser_twarogowy_Marzec_2013),
+            "2012" = mean(Ser_twarogowy_Marzec_2012),
+            "2011" = mean(Ser_twarogowy_Marzec_2011),
+            "2010" = mean(Ser_twarogowy_Marzec_2010),
+            "2009" = mean(Ser_twarogowy_Marzec_2009),
+            "2008" = mean(Ser_twarogowy_Marzec_2008),
+            "2007" = mean(Ser_twarogowy_Marzec_2007),
+            "2006" = mean(Ser_twarogowy_Marzec_2006))
+
+sr23<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Marzec, cena)
+
+
+
+ggplot(sr23,aes(x =średnia_Ser_twarogowy_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Marzec_2019),
+            "2018" = mean(Ser_dojrzewajacy_Marzec_2018),
+            "2017" = mean(Ser_dojrzewajacy_Marzec_2017),
+            "2016" = mean(Ser_dojrzewajacy_Marzec_2016),
+            "2015" = mean(Ser_dojrzewajacy_Marzec_2015),
+            "2014" = mean(Ser_dojrzewajacy_Marzec_2014),
+            "2013" = mean(Ser_dojrzewajacy_Marzec_2013),
+            "2012" = mean(Ser_dojrzewajacy_Marzec_2012),
+            "2011" = mean(Ser_dojrzewajacy_Marzec_2011),
+            "2010" = mean(Ser_dojrzewajacy_Marzec_2010),
+            "2009" = mean(Ser_dojrzewajacy_Marzec_2009),
+            "2008" = mean(Ser_dojrzewajacy_Marzec_2008),
+            "2007" = mean(Ser_dojrzewajacy_Marzec_2007),
+            "2006" = mean(Ser_dojrzewajacy_Marzec_2006))
+
+sr24<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Marzec, cena)
+
+
+ggplot(sr24,aes(x =średnia_Ser_dojrzewajacy_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Marzec_2019),
+            "2018" = mean(Jablka_Marzec_2018),
+            "2017" = mean(Jablka_Marzec_2017),
+            "2016" = mean(Jablka_Marzec_2016),
+            "2015" = mean(Jablka_Marzec_2015),
+            "2014" = mean(Jablka_Marzec_2014),
+            "2013" = mean(Jablka_Marzec_2013),
+            "2012" = mean(Jablka_Marzec_2012),
+            "2011" = mean(Jablka_Marzec_2011),
+            "2010" = mean(Jablka_Marzec_2010),
+            "2009" = mean(Jablka_Marzec_2009),
+            "2008" = mean(Jablka_Marzec_2008),
+            "2007" = mean(Jablka_Marzec_2007),
+            "2006" = mean(Jablka_Marzec_2006))
+
+sr25<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Marzec, cena)
+
+
+
+ggplot(sr25,aes(x =średnia_Jablka_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Marzec_2019),
+            "2018" = mean(Jajka_Marzec_2018),
+            "2017" = mean(Jajka_Marzec_2017),
+            "2016" = mean(Jajka_Marzec_2016),
+            "2015" = mean(Jajka_Marzec_2015),
+            "2014" = mean(Jajka_Marzec_2014),
+            "2013" = mean(Jajka_Marzec_2013),
+            "2012" = mean(Jajka_Marzec_2012),
+            "2011" = mean(Jajka_Marzec_2011),
+            "2010" = mean(Jajka_Marzec_2010),
+            "2009" = mean(Jajka_Marzec_2009),
+            "2008" = mean(Jajka_Marzec_2008),
+            "2007" = mean(Jajka_Marzec_2007),
+            "2006" = mean(Jajka_Marzec_2006))
+
+sr26<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Marzec, cena)
+
+
+ggplot(sr26,aes(x =średnia_Jajka_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Marzec_2019),
+            "2018" = mean(Ziemniaki_Marzec_2018),
+            "2017" = mean(Ziemniaki_Marzec_2017),
+            "2016" = mean(Ziemniaki_Marzec_2016),
+            "2015" = mean(Ziemniaki_Marzec_2015),
+            "2014" = mean(Ziemniaki_Marzec_2014),
+            "2013" = mean(Ziemniaki_Marzec_2013),
+            "2012" = mean(Ziemniaki_Marzec_2012),
+            "2011" = mean(Ziemniaki_Marzec_2011),
+            "2010" = mean(Ziemniaki_Marzec_2010),
+            "2009" = mean(Ziemniaki_Marzec_2009),
+            "2008" = mean(Ziemniaki_Marzec_2008),
+            "2007" = mean(Ziemniaki_Marzec_2007),
+            "2006" = mean(Ziemniaki_Marzec_2006))
+
+sr27<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Marzec, cena)
+
+ggplot(sr27,aes(x =średnia_Ziemniaki_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Marzec_2019),
+            "2018" = mean(Koszulka_Marzec_2018),
+            "2017" = mean(Koszulka_Marzec_2017),
+            "2016" = mean(Koszulka_Marzec_2016),
+            "2015" = mean(Koszulka_Marzec_2015),
+            "2014" = mean(Koszulka_Marzec_2014),
+            "2013" = mean(Koszulka_Marzec_2013),
+            "2012" = mean(Koszulka_Marzec_2012),
+            "2011" = mean(Koszulka_Marzec_2011),
+            "2010" = mean(Koszulka_Marzec_2010),
+            "2009" = mean(Koszulka_Marzec_2009),
+            "2008" = mean(Koszulka_Marzec_2008),
+            "2007" = mean(Koszulka_Marzec_2007),
+            "2006" = mean(Koszulka_Marzec_2006))
+
+sr28<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Marzec, cena)
+
+
+ggplot(sr28,aes(x =średnia_Koszulka_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Marzec_2019),
+            "2018" = mean(Woda_Marzec_2018),
+            "2017" = mean(Woda_Marzec_2017),
+            "2016" = mean(Woda_Marzec_2016),
+            "2015" = mean(Woda_Marzec_2015),
+            "2014" = mean(Woda_Marzec_2014),
+            "2013" = mean(Woda_Marzec_2013),
+            "2012" = mean(Woda_Marzec_2012),
+            "2011" = mean(Woda_Marzec_2011),
+            "2010" = mean(Woda_Marzec_2010),
+            "2009" = mean(Woda_Marzec_2009),
+            "2008" = mean(Woda_Marzec_2008),
+            "2007" = mean(Woda_Marzec_2007),
+            "2006" = mean(Woda_Marzec_2006))
+
+sr29<-gather(round(Sr_Woda, digits=2), średnia_Woda_Marzec, cena)
+
+
+
+ggplot(sr29,aes(x =średnia_Woda_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Marzec_2019),
+            "2018" = mean(Wegiel_kamienny_Marzec_2018),
+            "2017" = mean(Wegiel_kamienny_Marzec_2017),
+            "2016" = mean(Wegiel_kamienny_Marzec_2016),
+            "2015" = mean(Wegiel_kamienny_Marzec_2015),
+            "2014" = mean(Wegiel_kamienny_Marzec_2014),
+            "2013" = mean(Wegiel_kamienny_Marzec_2013),
+            "2012" = mean(Wegiel_kamienny_Marzec_2012),
+            "2011" = mean(Wegiel_kamienny_Marzec_2011),
+            "2010" = mean(Wegiel_kamienny_Marzec_2010),
+            "2009" = mean(Wegiel_kamienny_Marzec_2009),
+            "2008" = mean(Wegiel_kamienny_Marzec_2008),
+            "2007" = mean(Wegiel_kamienny_Marzec_2007),
+            "2006" = mean(Wegiel_kamienny_Marzec_2006))
+
+sr30<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Marzec, cena)
+
+
+ggplot(sr30,aes(x = średnia_Wegiel_kamienny_Marzec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena tony węgla w marcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+        
+ #Kwietnie
+
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Kwiecien_2019),
+            "2018" = mean(Mleko_3.5proc_Kwiecien_2018),
+            "2017" = mean(Mleko_3.5proc_Kwiecien_2017),
+            "2016" = mean(Mleko_3.5proc_Kwiecien_2016),
+            "2015" = mean(Mleko_3.5proc_Kwiecien_2015),
+            "2014" = mean(Mleko_3.5proc_Kwiecien_2014),
+            "2013" = mean(Mleko_3.5proc_Kwiecien_2013),
+            "2012" = mean(Mleko_3.5proc_Kwiecien_2012),
+            "2011" = mean(Mleko_3.5proc_Kwiecien_2011),
+            "2010" = mean(Mleko_3.5proc_Kwiecien_2010),
+            "2009" = mean(Mleko_3.5proc_Kwiecien_2009),
+            "2008" = mean(Mleko_3.5proc_Kwiecien_2008),
+            "2007" = mean(Mleko_3.5proc_Kwiecien_2007),
+            "2006" = mean(Mleko_3.5proc_Kwiecien_2006))
+
+sr31<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Kwiecien, cena)
+
+ggplot(sr31,aes(x =średnia_Mleko_3.5proc_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Kwiecien_2019),
+            "2018" = mean(Mleko_2.5proc_Kwiecien_2018),
+            "2017" = mean(Mleko_2.5proc_Kwiecien_2017),
+            "2016" = mean(Mleko_2.5proc_Kwiecien_2016),
+            "2015" = mean(Mleko_2.5proc_Kwiecien_2015),
+            "2014" = mean(Mleko_2.5proc_Kwiecien_2014),
+            "2013" = mean(Mleko_2.5proc_Kwiecien_2013),
+            "2012" = mean(Mleko_2.5proc_Kwiecien_2012),
+            "2011" = mean(Mleko_2.5proc_Kwiecien_2011),
+            "2010" = mean(Mleko_2.5proc_Kwiecien_2010),
+            "2009" = mean(Mleko_2.5proc_Kwiecien_2009),
+            "2008" = mean(Mleko_2.5proc_Kwiecien_2008),
+            "2007" = mean(Mleko_2.5proc_Kwiecien_2007),
+            "2006" = mean(Mleko_2.5proc_Kwiecien_2006))
+
+sr32<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Kwiecien, cena)
+
+ggplot(sr32,aes(x =średnia_Mleko_2.5proc_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))          
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Kwiecien_2019),
+            "2018" = mean(Ser_twarogowy_Kwiecien_2018),
+            "2017" = mean(Ser_twarogowy_Kwiecien_2017),
+            "2016" = mean(Ser_twarogowy_Kwiecien_2016),
+            "2015" = mean(Ser_twarogowy_Kwiecien_2015),
+            "2014" = mean(Ser_twarogowy_Kwiecien_2014),
+            "2013" = mean(Ser_twarogowy_Kwiecien_2013),
+            "2012" = mean(Ser_twarogowy_Kwiecien_2012),
+            "2011" = mean(Ser_twarogowy_Kwiecien_2011),
+            "2010" = mean(Ser_twarogowy_Kwiecien_2010),
+            "2009" = mean(Ser_twarogowy_Kwiecien_2009),
+            "2008" = mean(Ser_twarogowy_Kwiecien_2008),
+            "2007" = mean(Ser_twarogowy_Kwiecien_2007),
+            "2006" = mean(Ser_twarogowy_Kwiecien_2006))
+
+sr33<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Kwiecien, cena)
+
+
+
+ggplot(sr33,aes(x =średnia_Ser_twarogowy_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Kwiecien_2019),
+            "2018" = mean(Ser_dojrzewajacy_Kwiecien_2018),
+            "2017" = mean(Ser_dojrzewajacy_Kwiecien_2017),
+            "2016" = mean(Ser_dojrzewajacy_Kwiecien_2016),
+            "2015" = mean(Ser_dojrzewajacy_Kwiecien_2015),
+            "2014" = mean(Ser_dojrzewajacy_Kwiecien_2014),
+            "2013" = mean(Ser_dojrzewajacy_Kwiecien_2013),
+            "2012" = mean(Ser_dojrzewajacy_Kwiecien_2012),
+            "2011" = mean(Ser_dojrzewajacy_Kwiecien_2011),
+            "2010" = mean(Ser_dojrzewajacy_Kwiecien_2010),
+            "2009" = mean(Ser_dojrzewajacy_Kwiecien_2009),
+            "2008" = mean(Ser_dojrzewajacy_Kwiecien_2008),
+            "2007" = mean(Ser_dojrzewajacy_Kwiecien_2007),
+            "2006" = mean(Ser_dojrzewajacy_Kwiecien_2006))
+
+sr34<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Kwiecien, cena)
+
+
+
+ggplot(sr34,aes(x =średnia_Ser_dojrzewajacy_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Kwiecien_2019),
+            "2018" = mean(Jablka_Kwiecien_2018),
+            "2017" = mean(Jablka_Kwiecien_2017),
+            "2016" = mean(Jablka_Kwiecien_2016),
+            "2015" = mean(Jablka_Kwiecien_2015),
+            "2014" = mean(Jablka_Kwiecien_2014),
+            "2013" = mean(Jablka_Kwiecien_2013),
+            "2012" = mean(Jablka_Kwiecien_2012),
+            "2011" = mean(Jablka_Kwiecien_2011),
+            "2010" = mean(Jablka_Kwiecien_2010),
+            "2009" = mean(Jablka_Kwiecien_2009),
+            "2008" = mean(Jablka_Kwiecien_2008),
+            "2007" = mean(Jablka_Kwiecien_2007),
+            "2006" = mean(Jablka_Kwiecien_2006))
+
+sr35<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Kwiecien, cena)
+
+
+
+ggplot(sr35,aes(x =średnia_Jablka_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Kwiecien_2019),
+            "2018" = mean(Jajka_Kwiecien_2018),
+            "2017" = mean(Jajka_Kwiecien_2017),
+            "2016" = mean(Jajka_Kwiecien_2016),
+            "2015" = mean(Jajka_Kwiecien_2015),
+            "2014" = mean(Jajka_Kwiecien_2014),
+            "2013" = mean(Jajka_Kwiecien_2013),
+            "2012" = mean(Jajka_Kwiecien_2012),
+            "2011" = mean(Jajka_Kwiecien_2011),
+            "2010" = mean(Jajka_Kwiecien_2010),
+            "2009" = mean(Jajka_Kwiecien_2009),
+            "2008" = mean(Jajka_Kwiecien_2008),
+            "2007" = mean(Jajka_Kwiecien_2007),
+            "2006" = mean(Jajka_Kwiecien_2006))
+
+sr36<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Kwiecien, cena)
+
+
+ggplot(sr36,aes(x =średnia_Jajka_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Kwiecien_2019),
+            "2018" = mean(Ziemniaki_Kwiecien_2018),
+            "2017" = mean(Ziemniaki_Kwiecien_2017),
+            "2016" = mean(Ziemniaki_Kwiecien_2016),
+            "2015" = mean(Ziemniaki_Kwiecien_2015),
+            "2014" = mean(Ziemniaki_Kwiecien_2014),
+            "2013" = mean(Ziemniaki_Kwiecien_2013),
+            "2012" = mean(Ziemniaki_Kwiecien_2012),
+            "2011" = mean(Ziemniaki_Kwiecien_2011),
+            "2010" = mean(Ziemniaki_Kwiecien_2010),
+            "2009" = mean(Ziemniaki_Kwiecien_2009),
+            "2008" = mean(Ziemniaki_Kwiecien_2008),
+            "2007" = mean(Ziemniaki_Kwiecien_2007),
+            "2006" = mean(Ziemniaki_Kwiecien_2006))
+
+sr37<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Kwiecien, cena)
+
+ggplot(sr37,aes(x =średnia_Ziemniaki_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Kwiecien_2019),
+            "2018" = mean(Koszulka_Kwiecien_2018),
+            "2017" = mean(Koszulka_Kwiecien_2017),
+            "2016" = mean(Koszulka_Kwiecien_2016),
+            "2015" = mean(Koszulka_Kwiecien_2015),
+            "2014" = mean(Koszulka_Kwiecien_2014),
+            "2013" = mean(Koszulka_Kwiecien_2013),
+            "2012" = mean(Koszulka_Kwiecien_2012),
+            "2011" = mean(Koszulka_Kwiecien_2011),
+            "2010" = mean(Koszulka_Kwiecien_2010),
+            "2009" = mean(Koszulka_Kwiecien_2009),
+            "2008" = mean(Koszulka_Kwiecien_2008),
+            "2007" = mean(Koszulka_Kwiecien_2007),
+            "2006" = mean(Koszulka_Kwiecien_2006))
+
+sr38<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Kwiecien, cena)
+
+
+ggplot(sr38,aes(x =średnia_Koszulka_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Kwiecien_2019),
+            "2018" = mean(Woda_Kwiecien_2018),
+            "2017" = mean(Woda_Kwiecien_2017),
+            "2016" = mean(Woda_Kwiecien_2016),
+            "2015" = mean(Woda_Kwiecien_2015),
+            "2014" = mean(Woda_Kwiecien_2014),
+            "2013" = mean(Woda_Kwiecien_2013),
+            "2012" = mean(Woda_Kwiecien_2012),
+            "2011" = mean(Woda_Kwiecien_2011),
+            "2010" = mean(Woda_Kwiecien_2010),
+            "2009" = mean(Woda_Kwiecien_2009),
+            "2008" = mean(Woda_Kwiecien_2008),
+            "2007" = mean(Woda_Kwiecien_2007),
+            "2006" = mean(Woda_Kwiecien_2006))
+
+sr39<-gather(round(Sr_Woda, digits=2), średnia_Woda_Kwiecien, cena)
+
+
+
+ggplot(sr39,aes(x =średnia_Woda_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Kwiecien_2019),
+            "2018" = mean(Wegiel_kamienny_Kwiecien_2018),
+            "2017" = mean(Wegiel_kamienny_Kwiecien_2017),
+            "2016" = mean(Wegiel_kamienny_Kwiecien_2016),
+            "2015" = mean(Wegiel_kamienny_Kwiecien_2015),
+            "2014" = mean(Wegiel_kamienny_Kwiecien_2014),
+            "2013" = mean(Wegiel_kamienny_Kwiecien_2013),
+            "2012" = mean(Wegiel_kamienny_Kwiecien_2012),
+            "2011" = mean(Wegiel_kamienny_Kwiecien_2011),
+            "2010" = mean(Wegiel_kamienny_Kwiecien_2010),
+            "2009" = mean(Wegiel_kamienny_Kwiecien_2009),
+            "2008" = mean(Wegiel_kamienny_Kwiecien_2008),
+            "2007" = mean(Wegiel_kamienny_Kwiecien_2007),
+            "2006" = mean(Wegiel_kamienny_Kwiecien_2006))
+
+sr40<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Kwiecien, cena)
+
+
+
+ggplot(sr40,aes(x =średnia_Wegiel_kamienny_Kwiecien, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w kwietniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+ #Maje
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Maj_2019),
+            "2018" = mean(Mleko_3.5proc_Maj_2018),
+            "2017" = mean(Mleko_3.5proc_Maj_2017),
+            "2016" = mean(Mleko_3.5proc_Maj_2016),
+            "2015" = mean(Mleko_3.5proc_Maj_2015),
+            "2014" = mean(Mleko_3.5proc_Maj_2014),
+            "2013" = mean(Mleko_3.5proc_Maj_2013),
+            "2012" = mean(Mleko_3.5proc_Maj_2012),
+            "2011" = mean(Mleko_3.5proc_Maj_2011),
+            "2010" = mean(Mleko_3.5proc_Maj_2010),
+            "2009" = mean(Mleko_3.5proc_Maj_2009),
+            "2008" = mean(Mleko_3.5proc_Maj_2008),
+            "2007" = mean(Mleko_3.5proc_Maj_2007),
+            "2006" = mean(Mleko_3.5proc_Maj_2006))
+
+sr41<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Maj, cena)
+4
+ggplot(sr41,aes(x =średnia_Mleko_3.5proc_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Maj_2019),
+            "2018" = mean(Mleko_2.5proc_Maj_2018),
+            "2017" = mean(Mleko_2.5proc_Maj_2017),
+            "2016" = mean(Mleko_2.5proc_Maj_2016),
+            "2015" = mean(Mleko_2.5proc_Maj_2015),
+            "2014" = mean(Mleko_2.5proc_Maj_2014),
+            "2013" = mean(Mleko_2.5proc_Maj_2013),
+            "2012" = mean(Mleko_2.5proc_Maj_2012),
+            "2011" = mean(Mleko_2.5proc_Maj_2011),
+            "2010" = mean(Mleko_2.5proc_Maj_2010),
+            "2009" = mean(Mleko_2.5proc_Maj_2009),
+            "2008" = mean(Mleko_2.5proc_Maj_2008),
+            "2007" = mean(Mleko_2.5proc_Maj_2007),
+            "2006" = mean(Mleko_2.5proc_Maj_2006))
+
+sr42<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Maj, cena)
+
+ggplot(sr42,aes(x =średnia_Mleko_2.5proc_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Maj_2019),
+            "2018" = mean(Ser_twarogowy_Maj_2018),
+            "2017" = mean(Ser_twarogowy_Maj_2017),
+            "2016" = mean(Ser_twarogowy_Maj_2016),
+            "2015" = mean(Ser_twarogowy_Maj_2015),
+            "2014" = mean(Ser_twarogowy_Maj_2014),
+            "2013" = mean(Ser_twarogowy_Maj_2013),
+            "2012" = mean(Ser_twarogowy_Maj_2012),
+            "2011" = mean(Ser_twarogowy_Maj_2011),
+            "2010" = mean(Ser_twarogowy_Maj_2010),
+            "2009" = mean(Ser_twarogowy_Maj_2009),
+            "2008" = mean(Ser_twarogowy_Maj_2008),
+            "2007" = mean(Ser_twarogowy_Maj_2007),
+            "2006" = mean(Ser_twarogowy_Maj_2006))
+
+sr43<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Maj, cena)
+
+
+
+ggplot(sr43,aes(x =średnia_Ser_twarogowy_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Maj_2019),
+            "2018" = mean(Ser_dojrzewajacy_Maj_2018),
+            "2017" = mean(Ser_dojrzewajacy_Maj_2017),
+            "2016" = mean(Ser_dojrzewajacy_Maj_2016),
+            "2015" = mean(Ser_dojrzewajacy_Maj_2015),
+            "2014" = mean(Ser_dojrzewajacy_Maj_2014),
+            "2013" = mean(Ser_dojrzewajacy_Maj_2013),
+            "2012" = mean(Ser_dojrzewajacy_Maj_2012),
+            "2011" = mean(Ser_dojrzewajacy_Maj_2011),
+            "2010" = mean(Ser_dojrzewajacy_Maj_2010),
+            "2009" = mean(Ser_dojrzewajacy_Maj_2009),
+            "2008" = mean(Ser_dojrzewajacy_Maj_2008),
+            "2007" = mean(Ser_dojrzewajacy_Maj_2007),
+            "2006" = mean(Ser_dojrzewajacy_Maj_2006))
+
+sr44<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Maj, cena)
+
+
+
+ggplot(sr44,aes(x =średnia_Ser_dojrzewajacy_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Maj_2019),
+            "2018" = mean(Jablka_Maj_2018),
+            "2017" = mean(Jablka_Maj_2017),
+            "2016" = mean(Jablka_Maj_2016),
+            "2015" = mean(Jablka_Maj_2015),
+            "2014" = mean(Jablka_Maj_2014),
+            "2013" = mean(Jablka_Maj_2013),
+            "2012" = mean(Jablka_Maj_2012),
+            "2011" = mean(Jablka_Maj_2011),
+            "2010" = mean(Jablka_Maj_2010),
+            "2009" = mean(Jablka_Maj_2009),
+            "2008" = mean(Jablka_Maj_2008),
+            "2007" = mean(Jablka_Maj_2007),
+            "2006" = mean(Jablka_Maj_2006))
+
+sr45<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Maj, cena)
+
+
+
+ggplot(sr45,aes(x =średnia_Jablka_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Maj_2019),
+            "2018" = mean(Jajka_Maj_2018),
+            "2017" = mean(Jajka_Maj_2017),
+            "2016" = mean(Jajka_Maj_2016),
+            "2015" = mean(Jajka_Maj_2015),
+            "2014" = mean(Jajka_Maj_2014),
+            "2013" = mean(Jajka_Maj_2013),
+            "2012" = mean(Jajka_Maj_2012),
+            "2011" = mean(Jajka_Maj_2011),
+            "2010" = mean(Jajka_Maj_2010),
+            "2009" = mean(Jajka_Maj_2009),
+            "2008" = mean(Jajka_Maj_2008),
+            "2007" = mean(Jajka_Maj_2007),
+            "2006" = mean(Jajka_Maj_2006))
+
+sr46<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Maj, cena)
+
+
+ggplot(sr46,aes(x =średnia_Jajka_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT.")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Maj_2019),
+            "2018" = mean(Ziemniaki_Maj_2018),
+            "2017" = mean(Ziemniaki_Maj_2017),
+            "2016" = mean(Ziemniaki_Maj_2016),
+            "2015" = mean(Ziemniaki_Maj_2015),
+            "2014" = mean(Ziemniaki_Maj_2014),
+            "2013" = mean(Ziemniaki_Maj_2013),
+            "2012" = mean(Ziemniaki_Maj_2012),
+            "2011" = mean(Ziemniaki_Maj_2011),
+            "2010" = mean(Ziemniaki_Maj_2010),
+            "2009" = mean(Ziemniaki_Maj_2009),
+            "2008" = mean(Ziemniaki_Maj_2008),
+            "2007" = mean(Ziemniaki_Maj_2007),
+            "2006" = mean(Ziemniaki_Maj_2006))
+
+sr47<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Maj, cena)
+
+ggplot(sr47,aes(x =średnia_Ziemniaki_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Maj_2019),
+            "2018" = mean(Koszulka_Maj_2018),
+            "2017" = mean(Koszulka_Maj_2017),
+            "2016" = mean(Koszulka_Maj_2016),
+            "2015" = mean(Koszulka_Maj_2015),
+            "2014" = mean(Koszulka_Maj_2014),
+            "2013" = mean(Koszulka_Maj_2013),
+            "2012" = mean(Koszulka_Maj_2012),
+            "2011" = mean(Koszulka_Maj_2011),
+            "2010" = mean(Koszulka_Maj_2010),
+            "2009" = mean(Koszulka_Maj_2009),
+            "2008" = mean(Koszulka_Maj_2008),
+            "2007" = mean(Koszulka_Maj_2007),
+            "2006" = mean(Koszulka_Maj_2006))
+
+sr48<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Maj, cena)
+
+
+ggplot(sr48,aes(x =średnia_Koszulka_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Maj_2019),
+            "2018" = mean(Woda_Maj_2018),
+            "2017" = mean(Woda_Maj_2017),
+            "2016" = mean(Woda_Maj_2016),
+            "2015" = mean(Woda_Maj_2015),
+            "2014" = mean(Woda_Maj_2014),
+            "2013" = mean(Woda_Maj_2013),
+            "2012" = mean(Woda_Maj_2012),
+            "2011" = mean(Woda_Maj_2011),
+            "2010" = mean(Woda_Maj_2010),
+            "2009" = mean(Woda_Maj_2009),
+            "2008" = mean(Woda_Maj_2008),
+            "2007" = mean(Woda_Maj_2007),
+            "2006" = mean(Woda_Maj_2006))
+
+sr49<-gather(round(Sr_Woda, digits=2), średnia_Woda_Maj, cena)
+
+
+
+ggplot(sr49,aes(x =średnia_Woda_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Maj_2019),
+            "2018" = mean(Wegiel_kamienny_Maj_2018),
+            "2017" = mean(Wegiel_kamienny_Maj_2017),
+            "2016" = mean(Wegiel_kamienny_Maj_2016),
+            "2015" = mean(Wegiel_kamienny_Maj_2015),
+            "2014" = mean(Wegiel_kamienny_Maj_2014),
+            "2013" = mean(Wegiel_kamienny_Maj_2013),
+            "2012" = mean(Wegiel_kamienny_Maj_2012),
+            "2011" = mean(Wegiel_kamienny_Maj_2011),
+            "2010" = mean(Wegiel_kamienny_Maj_2010),
+            "2009" = mean(Wegiel_kamienny_Maj_2009),
+            "2008" = mean(Wegiel_kamienny_Maj_2008),
+            "2007" = mean(Wegiel_kamienny_Maj_2007),
+            "2006" = mean(Wegiel_kamienny_Maj_2006))
+
+sr50<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Maj, cena)
+
+
+
+ggplot(sr50,aes(x =średnia_Wegiel_kamienny_Maj, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w majach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+  
+  
+  #Czerwce
+  
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Czerwiec_2019),
+            "2018" = mean(Mleko_3.5proc_Czerwiec_2018),
+            "2017" = mean(Mleko_3.5proc_Czerwiec_2017),
+            "2016" = mean(Mleko_3.5proc_Czerwiec_2016),
+            "2015" = mean(Mleko_3.5proc_Czerwiec_2015),
+            "2014" = mean(Mleko_3.5proc_Czerwiec_2014),
+            "2013" = mean(Mleko_3.5proc_Czerwiec_2013),
+            "2012" = mean(Mleko_3.5proc_Czerwiec_2012),
+            "2011" = mean(Mleko_3.5proc_Czerwiec_2011),
+            "2010" = mean(Mleko_3.5proc_Czerwiec_2010),
+            "2009" = mean(Mleko_3.5proc_Czerwiec_2009),
+            "2008" = mean(Mleko_3.5proc_Czerwiec_2008),
+            "2007" = mean(Mleko_3.5proc_Czerwiec_2007),
+            "2006" = mean(Mleko_3.5proc_Czerwiec_2006))
+
+sr51<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Czerwiec, cena)
+4
+ggplot(sr51,aes(x =średnia_Mleko_3.5proc_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+  
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Czerwiec_2019),
+            "2018" = mean(Mleko_2.5proc_Czerwiec_2018),
+            "2017" = mean(Mleko_2.5proc_Czerwiec_2017),
+            "2016" = mean(Mleko_2.5proc_Czerwiec_2016),
+            "2015" = mean(Mleko_2.5proc_Czerwiec_2015),
+            "2014" = mean(Mleko_2.5proc_Czerwiec_2014),
+            "2013" = mean(Mleko_2.5proc_Czerwiec_2013),
+            "2012" = mean(Mleko_2.5proc_Czerwiec_2012),
+            "2011" = mean(Mleko_2.5proc_Czerwiec_2011),
+            "2010" = mean(Mleko_2.5proc_Czerwiec_2010),
+            "2009" = mean(Mleko_2.5proc_Czerwiec_2009),
+            "2008" = mean(Mleko_2.5proc_Czerwiec_2008),
+            "2007" = mean(Mleko_2.5proc_Czerwiec_2007),
+            "2006" = mean(Mleko_2.5proc_Czerwiec_2006))
+
+sr52<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Czerwiec, cena)
+
+ggplot(sr52,aes(x =średnia_Mleko_2.5proc_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Czerwiec_2019),
+            "2018" = mean(Ser_twarogowy_Czerwiec_2018),
+            "2017" = mean(Ser_twarogowy_Czerwiec_2017),
+            "2016" = mean(Ser_twarogowy_Czerwiec_2016),
+            "2015" = mean(Ser_twarogowy_Czerwiec_2015),
+            "2014" = mean(Ser_twarogowy_Czerwiec_2014),
+            "2013" = mean(Ser_twarogowy_Czerwiec_2013),
+            "2012" = mean(Ser_twarogowy_Czerwiec_2012),
+            "2011" = mean(Ser_twarogowy_Czerwiec_2011),
+            "2010" = mean(Ser_twarogowy_Czerwiec_2010),
+            "2009" = mean(Ser_twarogowy_Czerwiec_2009),
+            "2008" = mean(Ser_twarogowy_Czerwiec_2008),
+            "2007" = mean(Ser_twarogowy_Czerwiec_2007),
+            "2006" = mean(Ser_twarogowy_Czerwiec_2006))
+
+sr53<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Czerwiec, cena)
+
+
+
+ggplot(sr53,aes(x =średnia_Ser_twarogowy_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Czerwiec_2019),
+            "2018" = mean(Ser_dojrzewajacy_Czerwiec_2018),
+            "2017" = mean(Ser_dojrzewajacy_Czerwiec_2017),
+            "2016" = mean(Ser_dojrzewajacy_Czerwiec_2016),
+            "2015" = mean(Ser_dojrzewajacy_Czerwiec_2015),
+            "2014" = mean(Ser_dojrzewajacy_Czerwiec_2014),
+            "2013" = mean(Ser_dojrzewajacy_Czerwiec_2013),
+            "2012" = mean(Ser_dojrzewajacy_Czerwiec_2012),
+            "2011" = mean(Ser_dojrzewajacy_Czerwiec_2011),
+            "2010" = mean(Ser_dojrzewajacy_Czerwiec_2010),
+            "2009" = mean(Ser_dojrzewajacy_Czerwiec_2009),
+            "2008" = mean(Ser_dojrzewajacy_Czerwiec_2008),
+            "2007" = mean(Ser_dojrzewajacy_Czerwiec_2007),
+            "2006" = mean(Ser_dojrzewajacy_Czerwiec_2006))
+
+sr54<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Czerwiec, cena)
+
+
+
+ggplot(sr54,aes(x =średnia_Ser_dojrzewajacy_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+        
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Czerwiec_2019),
+            "2018" = mean(Jajka_Czerwiec_2018),
+            "2017" = mean(Jajka_Czerwiec_2017),
+            "2016" = mean(Jajka_Czerwiec_2016),
+            "2015" = mean(Jajka_Czerwiec_2015),
+            "2014" = mean(Jajka_Czerwiec_2014),
+            "2013" = mean(Jajka_Czerwiec_2013),
+            "2012" = mean(Jajka_Czerwiec_2012),
+            "2011" = mean(Jajka_Czerwiec_2011),
+            "2010" = mean(Jajka_Czerwiec_2010),
+            "2009" = mean(Jajka_Czerwiec_2009),
+            "2008" = mean(Jajka_Czerwiec_2008),
+            "2007" = mean(Jajka_Czerwiec_2007),
+            "2006" = mean(Jajka_Czerwiec_2006))
+sr55<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Czerwiec, cena)
+
+
+ggplot(sr55,aes(x =średnia_Jajka_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Czerwiec_2019),
+            "2018" = mean(Jablka_Czerwiec_2018),
+            "2017" = mean(Jablka_Czerwiec_2017),
+            "2016" = mean(Jablka_Czerwiec_2016),
+            "2015" = mean(Jablka_Czerwiec_2015),
+            "2014" = mean(Jablka_Czerwiec_2014),
+            "2013" = mean(Jablka_Czerwiec_2013),
+            "2012" = mean(Jablka_Czerwiec_2012),
+            "2011" = mean(Jablka_Czerwiec_2011),
+            "2010" = mean(Jablka_Czerwiec_2010),
+            "2009" = mean(Jablka_Czerwiec_2009),
+            "2008" = mean(Jablka_Czerwiec_2008),
+            "2007" = mean(Jablka_Czerwiec_2007),
+            "2006" = mean(Jablka_Czerwiec_2006))
+sr56<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Czerwiec, cena)
+
+ggplot(sr56,aes(x =średnia_Jablka_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Czerwiec_2019),
+            "2018" = mean(Ziemniaki_Czerwiec_2018),
+            "2017" = mean(Ziemniaki_Czerwiec_2017),
+            "2016" = mean(Ziemniaki_Czerwiec_2016),
+            "2015" = mean(Ziemniaki_Czerwiec_2015),
+            "2014" = mean(Ziemniaki_Czerwiec_2014),
+            "2013" = mean(Ziemniaki_Czerwiec_2013),
+            "2012" = mean(Ziemniaki_Czerwiec_2012),
+            "2011" = mean(Ziemniaki_Czerwiec_2011),
+            "2010" = mean(Ziemniaki_Czerwiec_2010),
+            "2009" = mean(Ziemniaki_Czerwiec_2009),
+            "2008" = mean(Ziemniaki_Czerwiec_2008),
+            "2007" = mean(Ziemniaki_Czerwiec_2007),
+            "2006" = mean(Ziemniaki_Czerwiec_2006))
+
+sr57<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Czerwiec, cena)
+
+ggplot(sr57,aes(x =średnia_Ziemniaki_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Czerwiec_2019),
+            "2018" = mean(Koszulka_Czerwiec_2018),
+            "2017" = mean(Koszulka_Czerwiec_2017),
+            "2016" = mean(Koszulka_Czerwiec_2016),
+            "2015" = mean(Koszulka_Czerwiec_2015),
+            "2014" = mean(Koszulka_Czerwiec_2014),
+            "2013" = mean(Koszulka_Czerwiec_2013),
+            "2012" = mean(Koszulka_Czerwiec_2012),
+            "2011" = mean(Koszulka_Czerwiec_2011),
+            "2010" = mean(Koszulka_Czerwiec_2010),
+            "2009" = mean(Koszulka_Czerwiec_2009),
+            "2008" = mean(Koszulka_Czerwiec_2008),
+            "2007" = mean(Koszulka_Czerwiec_2007),
+            "2006" = mean(Koszulka_Czerwiec_2006))
+
+sr58<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Czerwiec, cena)
+
+
+ggplot(sr58,aes(x =średnia_Koszulka_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Czerwiec_2019),
+            "2018" = mean(Woda_Czerwiec_2018),
+            "2017" = mean(Woda_Czerwiec_2017),
+            "2016" = mean(Woda_Czerwiec_2016),
+            "2015" = mean(Woda_Czerwiec_2015),
+            "2014" = mean(Woda_Czerwiec_2014),
+            "2013" = mean(Woda_Czerwiec_2013),
+            "2012" = mean(Woda_Czerwiec_2012),
+            "2011" = mean(Woda_Czerwiec_2011),
+            "2010" = mean(Woda_Czerwiec_2010),
+            "2009" = mean(Woda_Czerwiec_2009),
+            "2008" = mean(Woda_Czerwiec_2008),
+            "2007" = mean(Woda_Czerwiec_2007),
+            "2006" = mean(Woda_Czerwiec_2006))
+
+sr59<-gather(round(Sr_Woda, digits=2), średnia_Woda_Czerwiec, cena)
+
+
+
+ggplot(sr59,aes(x =średnia_Woda_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Czerwiec_2019),
+            "2018" = mean(Wegiel_kamienny_Czerwiec_2018),
+            "2017" = mean(Wegiel_kamienny_Czerwiec_2017),
+            "2016" = mean(Wegiel_kamienny_Czerwiec_2016),
+            "2015" = mean(Wegiel_kamienny_Czerwiec_2015),
+            "2014" = mean(Wegiel_kamienny_Czerwiec_2014),
+            "2013" = mean(Wegiel_kamienny_Czerwiec_2013),
+            "2012" = mean(Wegiel_kamienny_Czerwiec_2012),
+            "2011" = mean(Wegiel_kamienny_Czerwiec_2011),
+            "2010" = mean(Wegiel_kamienny_Czerwiec_2010),
+            "2009" = mean(Wegiel_kamienny_Czerwiec_2009),
+            "2008" = mean(Wegiel_kamienny_Czerwiec_2008),
+            "2007" = mean(Wegiel_kamienny_Czerwiec_2007),
+            "2006" = mean(Wegiel_kamienny_Czerwiec_2006))
+
+sr60<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Czerwiec, cena)
+
+
+
+ggplot(sr60,aes(x =średnia_Wegiel_kamienny_Czerwiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w czerwcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+        
+    #Lipce    
+        
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Lipiec_2019),
+            "2018" = mean(Mleko_3.5proc_Lipiec_2018),
+            "2017" = mean(Mleko_3.5proc_Lipiec_2017),
+            "2016" = mean(Mleko_3.5proc_Lipiec_2016),
+            "2015" = mean(Mleko_3.5proc_Lipiec_2015),
+            "2014" = mean(Mleko_3.5proc_Lipiec_2014),
+            "2013" = mean(Mleko_3.5proc_Lipiec_2013),
+            "2012" = mean(Mleko_3.5proc_Lipiec_2012),
+            "2011" = mean(Mleko_3.5proc_Lipiec_2011),
+            "2010" = mean(Mleko_3.5proc_Lipiec_2010),
+            "2009" = mean(Mleko_3.5proc_Lipiec_2009),
+            "2008" = mean(Mleko_3.5proc_Lipiec_2008),
+            "2007" = mean(Mleko_3.5proc_Lipiec_2007),
+            "2006" = mean(Mleko_3.5proc_Lipiec_2006))
+
+sr61<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Lipiec, cena)
+4
+ggplot(sr61,aes(x =średnia_Mleko_3.5proc_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Lipiec_2019),
+            "2018" = mean(Mleko_2.5proc_Lipiec_2018),
+            "2017" = mean(Mleko_2.5proc_Lipiec_2017),
+            "2016" = mean(Mleko_2.5proc_Lipiec_2016),
+            "2015" = mean(Mleko_2.5proc_Lipiec_2015),
+            "2014" = mean(Mleko_2.5proc_Lipiec_2014),
+            "2013" = mean(Mleko_2.5proc_Lipiec_2013),
+            "2012" = mean(Mleko_2.5proc_Lipiec_2012),
+            "2011" = mean(Mleko_2.5proc_Lipiec_2011),
+            "2010" = mean(Mleko_2.5proc_Lipiec_2010),
+            "2009" = mean(Mleko_2.5proc_Lipiec_2009),
+            "2008" = mean(Mleko_2.5proc_Lipiec_2008),
+            "2007" = mean(Mleko_2.5proc_Lipiec_2007),
+            "2006" = mean(Mleko_2.5proc_Lipiec_2006))
+
+sr62<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Lipiec, cena)
+
+ggplot(sr62,aes(x =średnia_Mleko_2.5proc_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Lipiec_2019),
+            "2018" = mean(Ser_twarogowy_Lipiec_2018),
+            "2017" = mean(Ser_twarogowy_Lipiec_2017),
+            "2016" = mean(Ser_twarogowy_Lipiec_2016),
+            "2015" = mean(Ser_twarogowy_Lipiec_2015),
+            "2014" = mean(Ser_twarogowy_Lipiec_2014),
+            "2013" = mean(Ser_twarogowy_Lipiec_2013),
+            "2012" = mean(Ser_twarogowy_Lipiec_2012),
+            "2011" = mean(Ser_twarogowy_Lipiec_2011),
+            "2010" = mean(Ser_twarogowy_Lipiec_2010),
+            "2009" = mean(Ser_twarogowy_Lipiec_2009),
+            "2008" = mean(Ser_twarogowy_Lipiec_2008),
+            "2007" = mean(Ser_twarogowy_Lipiec_2007),
+            "2006" = mean(Ser_twarogowy_Lipiec_2006))
+
+sr63<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Lipiec, cena)
+
+
+
+ggplot(sr63,aes(x =średnia_Ser_twarogowy_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Lipiec_2019),
+            "2018" = mean(Ser_dojrzewajacy_Lipiec_2018),
+            "2017" = mean(Ser_dojrzewajacy_Lipiec_2017),
+            "2016" = mean(Ser_dojrzewajacy_Lipiec_2016),
+            "2015" = mean(Ser_dojrzewajacy_Lipiec_2015),
+            "2014" = mean(Ser_dojrzewajacy_Lipiec_2014),
+            "2013" = mean(Ser_dojrzewajacy_Lipiec_2013),
+            "2012" = mean(Ser_dojrzewajacy_Lipiec_2012),
+            "2011" = mean(Ser_dojrzewajacy_Lipiec_2011),
+            "2010" = mean(Ser_dojrzewajacy_Lipiec_2010),
+            "2009" = mean(Ser_dojrzewajacy_Lipiec_2009),
+            "2008" = mean(Ser_dojrzewajacy_Lipiec_2008),
+            "2007" = mean(Ser_dojrzewajacy_Lipiec_2007),
+            "2006" = mean(Ser_dojrzewajacy_Lipiec_2006))
+
+sr64<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Lipiec, cena)
+
+
+
+ggplot(sr64,aes(x =średnia_Ser_dojrzewajacy_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Lipiec_2019),
+            "2018" = mean(Jajka_Lipiec_2018),
+            "2017" = mean(Jajka_Lipiec_2017),
+            "2016" = mean(Jajka_Lipiec_2016),
+            "2015" = mean(Jajka_Lipiec_2015),
+            "2014" = mean(Jajka_Lipiec_2014),
+            "2013" = mean(Jajka_Lipiec_2013),
+            "2012" = mean(Jajka_Lipiec_2012),
+            "2011" = mean(Jajka_Lipiec_2011),
+            "2010" = mean(Jajka_Lipiec_2010),
+            "2009" = mean(Jajka_Lipiec_2009),
+            "2008" = mean(Jajka_Lipiec_2008),
+            "2007" = mean(Jajka_Lipiec_2007),
+            "2006" = mean(Jajka_Lipiec_2006))
+sr65<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Lipiec, cena)
+
+
+
+ggplot(sr65,aes(x =średnia_Jajka_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Lipiec_2019),
+            "2018" = mean(Jablka_Lipiec_2018),
+            "2017" = mean(Jablka_Lipiec_2017),
+            "2016" = mean(Jablka_Lipiec_2016),
+            "2015" = mean(Jablka_Lipiec_2015),
+            "2014" = mean(Jablka_Lipiec_2014),
+            "2013" = mean(Jablka_Lipiec_2013),
+            "2012" = mean(Jablka_Lipiec_2012),
+            "2011" = mean(Jablka_Lipiec_2011),
+            "2010" = mean(Jablka_Lipiec_2010),
+            "2009" = mean(Jablka_Lipiec_2009),
+            "2008" = mean(Jablka_Lipiec_2008),
+            "2007" = mean(Jablka_Lipiec_2007),
+            "2006" = mean(Jablka_Lipiec_2006))
+sr66<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Lipiec, cena)
+
+
+
+ggplot(sr66,aes(x =średnia_Jablka_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Lipiec_2019),
+            "2018" = mean(Ziemniaki_Lipiec_2018),
+            "2017" = mean(Ziemniaki_Lipiec_2017),
+            "2016" = mean(Ziemniaki_Lipiec_2016),
+            "2015" = mean(Ziemniaki_Lipiec_2015),
+            "2014" = mean(Ziemniaki_Lipiec_2014),
+            "2013" = mean(Ziemniaki_Lipiec_2013),
+            "2012" = mean(Ziemniaki_Lipiec_2012),
+            "2011" = mean(Ziemniaki_Lipiec_2011),
+            "2010" = mean(Ziemniaki_Lipiec_2010),
+            "2009" = mean(Ziemniaki_Lipiec_2009),
+            "2008" = mean(Ziemniaki_Lipiec_2008),
+            "2007" = mean(Ziemniaki_Lipiec_2007),
+            "2006" = mean(Ziemniaki_Lipiec_2006))
+
+sr67<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Lipiec, cena)
+
+ggplot(sr67,aes(x =średnia_Ziemniaki_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Lipiec_2019),
+            "2018" = mean(Koszulka_Lipiec_2018),
+            "2017" = mean(Koszulka_Lipiec_2017),
+            "2016" = mean(Koszulka_Lipiec_2016),
+            "2015" = mean(Koszulka_Lipiec_2015),
+            "2014" = mean(Koszulka_Lipiec_2014),
+            "2013" = mean(Koszulka_Lipiec_2013),
+            "2012" = mean(Koszulka_Lipiec_2012),
+            "2011" = mean(Koszulka_Lipiec_2011),
+            "2010" = mean(Koszulka_Lipiec_2010),
+            "2009" = mean(Koszulka_Lipiec_2009),
+            "2008" = mean(Koszulka_Lipiec_2008),
+            "2007" = mean(Koszulka_Lipiec_2007),
+            "2006" = mean(Koszulka_Lipiec_2006))
+
+sr68<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Lipiec, cena)
+
+
+ggplot(sr68,aes(x =średnia_Koszulka_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Lipiec_2019),
+            "2018" = mean(Woda_Lipiec_2018),
+            "2017" = mean(Woda_Lipiec_2017),
+            "2016" = mean(Woda_Lipiec_2016),
+            "2015" = mean(Woda_Lipiec_2015),
+            "2014" = mean(Woda_Lipiec_2014),
+            "2013" = mean(Woda_Lipiec_2013),
+            "2012" = mean(Woda_Lipiec_2012),
+            "2011" = mean(Woda_Lipiec_2011),
+            "2010" = mean(Woda_Lipiec_2010),
+            "2009" = mean(Woda_Lipiec_2009),
+            "2008" = mean(Woda_Lipiec_2008),
+            "2007" = mean(Woda_Lipiec_2007),
+            "2006" = mean(Woda_Lipiec_2006))
+
+sr69<-gather(round(Sr_Woda, digits=2), średnia_Woda_Lipiec, cena)
+
+
+
+ggplot(sr69,aes(x =średnia_Woda_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Lipiec_2019),
+            "2018" = mean(Wegiel_kamienny_Lipiec_2018),
+            "2017" = mean(Wegiel_kamienny_Lipiec_2017),
+            "2016" = mean(Wegiel_kamienny_Lipiec_2016),
+            "2015" = mean(Wegiel_kamienny_Lipiec_2015),
+            "2014" = mean(Wegiel_kamienny_Lipiec_2014),
+            "2013" = mean(Wegiel_kamienny_Lipiec_2013),
+            "2012" = mean(Wegiel_kamienny_Lipiec_2012),
+            "2011" = mean(Wegiel_kamienny_Lipiec_2011),
+            "2010" = mean(Wegiel_kamienny_Lipiec_2010),
+            "2009" = mean(Wegiel_kamienny_Lipiec_2009),
+            "2008" = mean(Wegiel_kamienny_Lipiec_2008),
+            "2007" = mean(Wegiel_kamienny_Lipiec_2007),
+            "2006" = mean(Wegiel_kamienny_Lipiec_2006))
+
+sr70<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Lipiec, cena)
+
+
+
+ggplot(sr70,aes(x =średnia_Wegiel_kamienny_Lipiec, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w lipcach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))        
+
+summary(round(Sr_Wegiel_kamienny, digits=2))
+
+
+
+  #Sierpnie 
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Sierpień_2019),
+            "2018" = mean(Mleko_3.5proc_Sierpień_2018),
+            "2017" = mean(Mleko_3.5proc_Sierpień_2017),
+            "2016" = mean(Mleko_3.5proc_Sierpień_2016),
+            "2015" = mean(Mleko_3.5proc_Sierpień_2015),
+            "2014" = mean(Mleko_3.5proc_Sierpień_2014),
+            "2013" = mean(Mleko_3.5proc_Sierpień_2013),
+            "2012" = mean(Mleko_3.5proc_Sierpień_2012),
+            "2011" = mean(Mleko_3.5proc_Sierpień_2011),
+            "2010" = mean(Mleko_3.5proc_Sierpień_2010),
+            "2009" = mean(Mleko_3.5proc_Sierpień_2009),
+            "2008" = mean(Mleko_3.5proc_Sierpień_2008),
+            "2007" = mean(Mleko_3.5proc_Sierpień_2007),
+            "2006" = mean(Mleko_3.5proc_Sierpień_2006))
+
+sr71<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Sierpień, cena)
+4
+ggplot(sr71,aes(x =średnia_Mleko_3.5proc_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w sieprniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+  
+
+  
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Sierpień_2019),
+            "2018" = mean(Mleko_2.5proc_Sierpień_2018),
+            "2017" = mean(Mleko_2.5proc_Sierpień_2017),
+            "2016" = mean(Mleko_2.5proc_Sierpień_2016),
+            "2015" = mean(Mleko_2.5proc_Sierpień_2015),
+            "2014" = mean(Mleko_2.5proc_Sierpień_2014),
+            "2013" = mean(Mleko_2.5proc_Sierpień_2013),
+            "2012" = mean(Mleko_2.5proc_Sierpień_2012),
+            "2011" = mean(Mleko_2.5proc_Sierpień_2011),
+            "2010" = mean(Mleko_2.5proc_Sierpień_2010),
+            "2009" = mean(Mleko_2.5proc_Sierpień_2009),
+            "2008" = mean(Mleko_2.5proc_Sierpień_2008),
+            "2007" = mean(Mleko_2.5proc_Sierpień_2007),
+            "2006" = mean(Mleko_2.5proc_Sierpień_2006))
+
+sr72<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Sierpień, cena)
+
+ggplot(sr72,aes(x =średnia_Mleko_2.5proc_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w sierpniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Sierpień_2019),
+            "2018" = mean(Ser_twarogowy_Sierpień_2018),
+            "2017" = mean(Ser_twarogowy_Sierpień_2017),
+            "2016" = mean(Ser_twarogowy_Sierpień_2016),
+            "2015" = mean(Ser_twarogowy_Sierpień_2015),
+            "2014" = mean(Ser_twarogowy_Sierpień_2014),
+            "2013" = mean(Ser_twarogowy_Sierpień_2013),
+            "2012" = mean(Ser_twarogowy_Sierpień_2012),
+            "2011" = mean(Ser_twarogowy_Sierpień_2011),
+            "2010" = mean(Ser_twarogowy_Sierpień_2010),
+            "2009" = mean(Ser_twarogowy_Sierpień_2009),
+            "2008" = mean(Ser_twarogowy_Sierpień_2008),
+            "2007" = mean(Ser_twarogowy_Sierpień_2007),
+            "2006" = mean(Ser_twarogowy_Sierpień_2006))
+
+sr73<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Sierpień, cena)
+
+
+
+ggplot(sr73,aes(x =średnia_Ser_twarogowy_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w sieprniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Sierpień_2019),
+            "2018" = mean(Ser_dojrzewajacy_Sierpień_2018),
+            "2017" = mean(Ser_dojrzewajacy_Sierpień_2017),
+            "2016" = mean(Ser_dojrzewajacy_Sierpień_2016),
+            "2015" = mean(Ser_dojrzewajacy_Sierpień_2015),
+            "2014" = mean(Ser_dojrzewajacy_Sierpień_2014),
+            "2013" = mean(Ser_dojrzewajacy_Sierpień_2013),
+            "2012" = mean(Ser_dojrzewajacy_Sierpień_2012),
+            "2011" = mean(Ser_dojrzewajacy_Sierpień_2011),
+            "2010" = mean(Ser_dojrzewajacy_Sierpień_2010),
+            "2009" = mean(Ser_dojrzewajacy_Sierpień_2009),
+            "2008" = mean(Ser_dojrzewajacy_Sierpień_2008),
+            "2007" = mean(Ser_dojrzewajacy_Sierpień_2007),
+            "2006" = mean(Ser_dojrzewajacy_Sierpień_2006))
+
+sr74<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Sierpień, cena)
+
+
+
+ggplot(sr74,aes(x =średnia_Ser_dojrzewajacy_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w sierpniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Sierpień_2019),
+            "2018" = mean(Jajka_Sierpień_2018),
+            "2017" = mean(Jajka_Sierpień_2017),
+            "2016" = mean(Jajka_Sierpień_2016),
+            "2015" = mean(Jajka_Sierpień_2015),
+            "2014" = mean(Jajka_Sierpień_2014),
+            "2013" = mean(Jajka_Sierpień_2013),
+            "2012" = mean(Jajka_Sierpień_2012),
+            "2011" = mean(Jajka_Sierpień_2011),
+            "2010" = mean(Jajka_Sierpień_2010),
+            "2009" = mean(Jajka_Sierpień_2009),
+            "2008" = mean(Jajka_Sierpień_2008),
+            "2007" = mean(Jajka_Sierpień_2007),
+            "2006" = mean(Jajka_Sierpień_2006))
+sr75<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Sierpień, cena)
+
+
+
+ggplot(sr75,aes(x =średnia_Jajka_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w sierpniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Sierpień_2019),
+            "2018" = mean(Jablka_Sierpień_2018),
+            "2017" = mean(Jablka_Sierpień_2017),
+            "2016" = mean(Jablka_Sierpień_2016),
+            "2015" = mean(Jablka_Sierpień_2015),
+            "2014" = mean(Jablka_Sierpień_2014),
+            "2013" = mean(Jablka_Sierpień_2013),
+            "2012" = mean(Jablka_Sierpień_2012),
+            "2011" = mean(Jablka_Sierpień_2011),
+            "2010" = mean(Jablka_Sierpień_2010),
+            "2009" = mean(Jablka_Sierpień_2009),
+            "2008" = mean(Jablka_Sierpień_2008),
+            "2007" = mean(Jablka_Sierpień_2007),
+            "2006" = mean(Jablka_Sierpień_2006))
+sr76<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Sierpień, cena)
+
+
+
+ggplot(sr76,aes(x =średnia_Jablka_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w sierpniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Sierpień_2019),
+            "2018" = mean(Ziemniaki_Sierpień_2018),
+            "2017" = mean(Ziemniaki_Sierpień_2017),
+            "2016" = mean(Ziemniaki_Sierpień_2016),
+            "2015" = mean(Ziemniaki_Sierpień_2015),
+            "2014" = mean(Ziemniaki_Sierpień_2014),
+            "2013" = mean(Ziemniaki_Sierpień_2013),
+            "2012" = mean(Ziemniaki_Sierpień_2012),
+            "2011" = mean(Ziemniaki_Sierpień_2011),
+            "2010" = mean(Ziemniaki_Sierpień_2010),
+            "2009" = mean(Ziemniaki_Sierpień_2009),
+            "2008" = mean(Ziemniaki_Sierpień_2008),
+            "2007" = mean(Ziemniaki_Sierpień_2007),
+            "2006" = mean(Ziemniaki_Sierpień_2006))
+
+sr77<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Sierpień, cena)
+
+ggplot(sr77,aes(x =średnia_Ziemniaki_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w sierpniach 2006-2019.")+
+  xlab("ROK")+ 
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Sierpień_2019),
+            "2018" = mean(Koszulka_Sierpień_2018),
+            "2017" = mean(Koszulka_Sierpień_2017),
+            "2016" = mean(Koszulka_Sierpień_2016),
+            "2015" = mean(Koszulka_Sierpień_2015),
+            "2014" = mean(Koszulka_Sierpień_2014),
+            "2013" = mean(Koszulka_Sierpień_2013),
+            "2012" = mean(Koszulka_Sierpień_2012),
+            "2011" = mean(Koszulka_Sierpień_2011),
+            "2010" = mean(Koszulka_Sierpień_2010),
+            "2009" = mean(Koszulka_Sierpień_2009),
+            "2008" = mean(Koszulka_Sierpień_2008),
+            "2007" = mean(Koszulka_Sierpień_2007),
+            "2006" = mean(Koszulka_Sierpień_2006))
+
+sr78<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Sierpień, cena)
+
+
+ggplot(sr78,aes(x =średnia_Koszulka_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w sierpniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Sierpień_2019),
+            "2018" = mean(Woda_Sierpień_2018),
+            "2017" = mean(Woda_Sierpień_2017),
+            "2016" = mean(Woda_Sierpień_2016),
+            "2015" = mean(Woda_Sierpień_2015),
+            "2014" = mean(Woda_Sierpień_2014),
+            "2013" = mean(Woda_Sierpień_2013),
+            "2012" = mean(Woda_Sierpień_2012),
+            "2011" = mean(Woda_Sierpień_2011),
+            "2010" = mean(Woda_Sierpień_2010),
+            "2009" = mean(Woda_Sierpień_2009),
+            "2008" = mean(Woda_Sierpień_2008),
+            "2007" = mean(Woda_Sierpień_2007),
+            "2006" = mean(Woda_Sierpień_2006))
+
+sr79<-gather(round(Sr_Woda, digits=2), średnia_Woda_Sierpień, cena)
+
+
+
+ggplot(sr79,aes(x =średnia_Woda_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w sierpniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Sierpień_2019),
+            "2018" = mean(Wegiel_kamienny_Sierpień_2018),
+            "2017" = mean(Wegiel_kamienny_Sierpień_2017),
+            "2016" = mean(Wegiel_kamienny_Sierpień_2016),
+            "2015" = mean(Wegiel_kamienny_Sierpień_2015),
+            "2014" = mean(Wegiel_kamienny_Sierpień_2014),
+            "2013" = mean(Wegiel_kamienny_Sierpień_2013),
+            "2012" = mean(Wegiel_kamienny_Sierpień_2012),
+            "2011" = mean(Wegiel_kamienny_Sierpień_2011),
+            "2010" = mean(Wegiel_kamienny_Sierpień_2010),
+            "2009" = mean(Wegiel_kamienny_Sierpień_2009),
+            "2008" = mean(Wegiel_kamienny_Sierpień_2008),
+            "2007" = mean(Wegiel_kamienny_Sierpień_2007),
+            "2006" = mean(Wegiel_kamienny_Sierpień_2006))
+
+sr80<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Sierpień, cena)
+
+
+
+ggplot(sr80,aes(x =średnia_Wegiel_kamienny_Sierpień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w sierpniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))        
+
+summary(round(Sr_Wegiel_kamienny, digits=2))
+
+
+   #Wrześnie 
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Wrzesień_2019),
+            "2018" = mean(Mleko_3.5proc_Wrzesień_2018),
+            "2017" = mean(Mleko_3.5proc_Wrzesień_2017),
+            "2016" = mean(Mleko_3.5proc_Wrzesień_2016),
+            "2015" = mean(Mleko_3.5proc_Wrzesień_2015),
+            "2014" = mean(Mleko_3.5proc_Wrzesień_2014),
+            "2013" = mean(Mleko_3.5proc_Wrzesień_2013),
+            "2012" = mean(Mleko_3.5proc_Wrzesień_2012),
+            "2011" = mean(Mleko_3.5proc_Wrzesień_2011),
+            "2010" = mean(Mleko_3.5proc_Wrzesień_2010),
+            "2009" = mean(Mleko_3.5proc_Wrzesień_2009),
+            "2008" = mean(Mleko_3.5proc_Wrzesień_2008),
+            "2007" = mean(Mleko_3.5proc_Wrzesień_2007),
+            "2006" = mean(Mleko_3.5proc_Wrzesień_2006))
+
+sr81<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Wrzesień, cena)
+4
+ggplot(sr81,aes(x =średnia_Mleko_3.5proc_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Wrzesień_2019),
+            "2018" = mean(Mleko_2.5proc_Wrzesień_2018),
+            "2017" = mean(Mleko_2.5proc_Wrzesień_2017),
+            "2016" = mean(Mleko_2.5proc_Wrzesień_2016),
+            "2015" = mean(Mleko_2.5proc_Wrzesień_2015),
+            "2014" = mean(Mleko_2.5proc_Wrzesień_2014),
+            "2013" = mean(Mleko_2.5proc_Wrzesień_2013),
+            "2012" = mean(Mleko_2.5proc_Wrzesień_2012),
+            "2011" = mean(Mleko_2.5proc_Wrzesień_2011),
+            "2010" = mean(Mleko_2.5proc_Wrzesień_2010),
+            "2009" = mean(Mleko_2.5proc_Wrzesień_2009),
+            "2008" = mean(Mleko_2.5proc_Wrzesień_2008),
+            "2007" = mean(Mleko_2.5proc_Wrzesień_2007),
+            "2006" = mean(Mleko_2.5proc_Wrzesień_2006))
+
+sr82<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Wrzesień, cena)
+
+ggplot(sr82,aes(x =średnia_Mleko_2.5proc_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Wrzesień_2019),
+            "2018" = mean(Ser_twarogowy_Wrzesień_2018),
+            "2017" = mean(Ser_twarogowy_Wrzesień_2017),
+            "2016" = mean(Ser_twarogowy_Wrzesień_2016),
+            "2015" = mean(Ser_twarogowy_Wrzesień_2015),
+            "2014" = mean(Ser_twarogowy_Wrzesień_2014),
+            "2013" = mean(Ser_twarogowy_Wrzesień_2013),
+            "2012" = mean(Ser_twarogowy_Wrzesień_2012),
+            "2011" = mean(Ser_twarogowy_Wrzesień_2011),
+            "2010" = mean(Ser_twarogowy_Wrzesień_2010),
+            "2009" = mean(Ser_twarogowy_Wrzesień_2009),
+            "2008" = mean(Ser_twarogowy_Wrzesień_2008),
+            "2007" = mean(Ser_twarogowy_Wrzesień_2007),
+            "2006" = mean(Ser_twarogowy_Wrzesień_2006))
+
+sr83<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Wrzesień, cena)
+
+
+
+ggplot(sr83,aes(x =średnia_Ser_twarogowy_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Wrzesień_2019),
+            "2018" = mean(Ser_dojrzewajacy_Wrzesień_2018),
+            "2017" = mean(Ser_dojrzewajacy_Wrzesień_2017),
+            "2016" = mean(Ser_dojrzewajacy_Wrzesień_2016),
+            "2015" = mean(Ser_dojrzewajacy_Wrzesień_2015),
+            "2014" = mean(Ser_dojrzewajacy_Wrzesień_2014),
+            "2013" = mean(Ser_dojrzewajacy_Wrzesień_2013),
+            "2012" = mean(Ser_dojrzewajacy_Wrzesień_2012),
+            "2011" = mean(Ser_dojrzewajacy_Wrzesień_2011),
+            "2010" = mean(Ser_dojrzewajacy_Wrzesień_2010),
+            "2009" = mean(Ser_dojrzewajacy_Wrzesień_2009),
+            "2008" = mean(Ser_dojrzewajacy_Wrzesień_2008),
+            "2007" = mean(Ser_dojrzewajacy_Wrzesień_2007),
+            "2006" = mean(Ser_dojrzewajacy_Wrzesień_2006))
+
+sr84<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Wrzesień, cena)
+
+
+
+ggplot(sr84,aes(x =średnia_Ser_dojrzewajacy_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Wrzesień_2019),
+            "2018" = mean(Jajka_Wrzesień_2018),
+            "2017" = mean(Jajka_Wrzesień_2017),
+            "2016" = mean(Jajka_Wrzesień_2016),
+            "2015" = mean(Jajka_Wrzesień_2015),
+            "2014" = mean(Jajka_Wrzesień_2014),
+            "2013" = mean(Jajka_Wrzesień_2013),
+            "2012" = mean(Jajka_Wrzesień_2012),
+            "2011" = mean(Jajka_Wrzesień_2011),
+            "2010" = mean(Jajka_Wrzesień_2010),
+            "2009" = mean(Jajka_Wrzesień_2009),
+            "2008" = mean(Jajka_Wrzesień_2008),
+            "2007" = mean(Jajka_Wrzesień_2007),
+            "2006" = mean(Jajka_Wrzesień_2006))
+sr85<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Wrzesień, cena)
+
+
+
+ggplot(sr85,aes(x =średnia_Jajka_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Wrzesień_2019),
+            "2018" = mean(Jablka_Wrzesień_2018),
+            "2017" = mean(Jablka_Wrzesień_2017),
+            "2016" = mean(Jablka_Wrzesień_2016),
+            "2015" = mean(Jablka_Wrzesień_2015),
+            "2014" = mean(Jablka_Wrzesień_2014),
+            "2013" = mean(Jablka_Wrzesień_2013),
+            "2012" = mean(Jablka_Wrzesień_2012),
+            "2011" = mean(Jablka_Wrzesień_2011),
+            "2010" = mean(Jablka_Wrzesień_2010),
+            "2009" = mean(Jablka_Wrzesień_2009),
+            "2008" = mean(Jablka_Wrzesień_2008),
+            "2007" = mean(Jablka_Wrzesień_2007),
+            "2006" = mean(Jablka_Wrzesień_2006))
+sr86<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Wrzesień, cena)
+
+
+ggplot(sr86,aes(x =średnia_Jablka_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Wrzesień_2019),
+            "2018" = mean(Ziemniaki_Wrzesień_2018),
+            "2017" = mean(Ziemniaki_Wrzesień_2017),
+            "2016" = mean(Ziemniaki_Wrzesień_2016),
+            "2015" = mean(Ziemniaki_Wrzesień_2015),
+            "2014" = mean(Ziemniaki_Wrzesień_2014),
+            "2013" = mean(Ziemniaki_Wrzesień_2013),
+            "2012" = mean(Ziemniaki_Wrzesień_2012),
+            "2011" = mean(Ziemniaki_Wrzesień_2011),
+            "2010" = mean(Ziemniaki_Wrzesień_2010),
+            "2009" = mean(Ziemniaki_Wrzesień_2009),
+            "2008" = mean(Ziemniaki_Wrzesień_2008),
+            "2007" = mean(Ziemniaki_Wrzesień_2007),
+            "2006" = mean(Ziemniaki_Wrzesień_2006))
+
+sr87<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Wrzesień, cena)
+
+ggplot(sr87,aes(x =średnia_Ziemniaki_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Wrzesień_2019),
+            "2018" = mean(Koszulka_Wrzesień_2018),
+            "2017" = mean(Koszulka_Wrzesień_2017),
+            "2016" = mean(Koszulka_Wrzesień_2016),
+            "2015" = mean(Koszulka_Wrzesień_2015),
+            "2014" = mean(Koszulka_Wrzesień_2014),
+            "2013" = mean(Koszulka_Wrzesień_2013),
+            "2012" = mean(Koszulka_Wrzesień_2012),
+            "2011" = mean(Koszulka_Wrzesień_2011),
+            "2010" = mean(Koszulka_Wrzesień_2010),
+            "2009" = mean(Koszulka_Wrzesień_2009),
+            "2008" = mean(Koszulka_Wrzesień_2008),
+            "2007" = mean(Koszulka_Wrzesień_2007),
+            "2006" = mean(Koszulka_Wrzesień_2006))
+
+sr88<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Wrzesień, cena)
+
+
+ggplot(sr88,aes(x =średnia_Koszulka_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Wrzesień_2019),
+            "2018" = mean(Woda_Wrzesień_2018),
+            "2017" = mean(Woda_Wrzesień_2017),
+            "2016" = mean(Woda_Wrzesień_2016),
+            "2015" = mean(Woda_Wrzesień_2015),
+            "2014" = mean(Woda_Wrzesień_2014),
+            "2013" = mean(Woda_Wrzesień_2013),
+            "2012" = mean(Woda_Wrzesień_2012),
+            "2011" = mean(Woda_Wrzesień_2011),
+            "2010" = mean(Woda_Wrzesień_2010),
+            "2009" = mean(Woda_Wrzesień_2009),
+            "2008" = mean(Woda_Wrzesień_2008),
+            "2007" = mean(Woda_Wrzesień_2007),
+            "2006" = mean(Woda_Wrzesień_2006))
+
+sr89<-gather(round(Sr_Woda, digits=2), średnia_Woda_Wrzesień, cena)
+
+
+
+ggplot(sr89,aes(x =średnia_Woda_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Wrzesień_2019),
+            "2018" = mean(Wegiel_kamienny_Wrzesień_2018),
+            "2017" = mean(Wegiel_kamienny_Wrzesień_2017),
+            "2016" = mean(Wegiel_kamienny_Wrzesień_2016),
+            "2015" = mean(Wegiel_kamienny_Wrzesień_2015),
+            "2014" = mean(Wegiel_kamienny_Wrzesień_2014),
+            "2013" = mean(Wegiel_kamienny_Wrzesień_2013),
+            "2012" = mean(Wegiel_kamienny_Wrzesień_2012),
+            "2011" = mean(Wegiel_kamienny_Wrzesień_2011),
+            "2010" = mean(Wegiel_kamienny_Wrzesień_2010),
+            "2009" = mean(Wegiel_kamienny_Wrzesień_2009),
+            "2008" = mean(Wegiel_kamienny_Wrzesień_2008),
+            "2007" = mean(Wegiel_kamienny_Wrzesień_2007),
+            "2006" = mean(Wegiel_kamienny_Wrzesień_2006))
+
+sr90<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Wrzesień, cena)
+
+
+
+ggplot(sr90,aes(x =średnia_Wegiel_kamienny_Wrzesień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę we wrześniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))        
+
+summary(round(Sr_Wegiel_kamienny, digits=2))
+
+
+ #Październiki
+
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Październik_2019),
+            "2018" = mean(Mleko_3.5proc_Październik_2018),
+            "2017" = mean(Mleko_3.5proc_Październik_2017),
+            "2016" = mean(Mleko_3.5proc_Październik_2016),
+            "2015" = mean(Mleko_3.5proc_Październik_2015),
+            "2014" = mean(Mleko_3.5proc_Październik_2014),
+            "2013" = mean(Mleko_3.5proc_Październik_2013),
+            "2012" = mean(Mleko_3.5proc_Październik_2012),
+            "2011" = mean(Mleko_3.5proc_Październik_2011),
+            "2010" = mean(Mleko_3.5proc_Październik_2010),
+            "2009" = mean(Mleko_3.5proc_Październik_2009),
+            "2008" = mean(Mleko_3.5proc_Październik_2008),
+            "2007" = mean(Mleko_3.5proc_Październik_2007),
+            "2006" = mean(Mleko_3.5proc_Październik_2006))
+
+sr91<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Październik, cena)
+4
+ggplot(sr91,aes(x =średnia_Mleko_3.5proc_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Październik_2019),
+            "2018" = mean(Mleko_2.5proc_Październik_2018),
+            "2017" = mean(Mleko_2.5proc_Październik_2017),
+            "2016" = mean(Mleko_2.5proc_Październik_2016),
+            "2015" = mean(Mleko_2.5proc_Październik_2015),
+            "2014" = mean(Mleko_2.5proc_Październik_2014),
+            "2013" = mean(Mleko_2.5proc_Październik_2013),
+            "2012" = mean(Mleko_2.5proc_Październik_2012),
+            "2011" = mean(Mleko_2.5proc_Październik_2011),
+            "2010" = mean(Mleko_2.5proc_Październik_2010),
+            "2009" = mean(Mleko_2.5proc_Październik_2009),
+            "2008" = mean(Mleko_2.5proc_Październik_2008),
+            "2007" = mean(Mleko_2.5proc_Październik_2007),
+            "2006" = mean(Mleko_2.5proc_Październik_2006))
+
+sr92<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Październik, cena)
+
+ggplot(sr92,aes(x =średnia_Mleko_2.5proc_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleko o zawartości 2,5% tłuszczu w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1)) 
+        
+        
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Październik_2019),
+            "2018" = mean(Ser_twarogowy_Październik_2018),
+            "2017" = mean(Ser_twarogowy_Październik_2017),
+            "2016" = mean(Ser_twarogowy_Październik_2016),
+            "2015" = mean(Ser_twarogowy_Październik_2015),
+            "2014" = mean(Ser_twarogowy_Październik_2014),
+            "2013" = mean(Ser_twarogowy_Październik_2013),
+            "2012" = mean(Ser_twarogowy_Październik_2012),
+            "2011" = mean(Ser_twarogowy_Październik_2011),
+            "2010" = mean(Ser_twarogowy_Październik_2010),
+            "2009" = mean(Ser_twarogowy_Październik_2009),
+            "2008" = mean(Ser_twarogowy_Październik_2008),
+            "2007" = mean(Ser_twarogowy_Październik_2007),
+            "2006" = mean(Ser_twarogowy_Październik_2006))
+
+sr93<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Październik, cena)
+
+
+
+ggplot(sr93,aes(x =średnia_Ser_twarogowy_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Październik_2019),
+            "2018" = mean(Ser_dojrzewajacy_Październik_2018),
+            "2017" = mean(Ser_dojrzewajacy_Październik_2017),
+            "2016" = mean(Ser_dojrzewajacy_Październik_2016),
+            "2015" = mean(Ser_dojrzewajacy_Październik_2015),
+            "2014" = mean(Ser_dojrzewajacy_Październik_2014),
+            "2013" = mean(Ser_dojrzewajacy_Październik_2013),
+            "2012" = mean(Ser_dojrzewajacy_Październik_2012),
+            "2011" = mean(Ser_dojrzewajacy_Październik_2011),
+            "2010" = mean(Ser_dojrzewajacy_Październik_2010),
+            "2009" = mean(Ser_dojrzewajacy_Październik_2009),
+            "2008" = mean(Ser_dojrzewajacy_Październik_2008),
+            "2007" = mean(Ser_dojrzewajacy_Październik_2007),
+            "2006" = mean(Ser_dojrzewajacy_Październik_2006))
+
+sr94<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Październik, cena)
+
+
+
+ggplot(sr94,aes(x =średnia_Ser_dojrzewajacy_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Październik_2019),
+            "2018" = mean(Jajka_Październik_2018),
+            "2017" = mean(Jajka_Październik_2017),
+            "2016" = mean(Jajka_Październik_2016),
+            "2015" = mean(Jajka_Październik_2015),
+            "2014" = mean(Jajka_Październik_2014),
+            "2013" = mean(Jajka_Październik_2013),
+            "2012" = mean(Jajka_Październik_2012),
+            "2011" = mean(Jajka_Październik_2011),
+            "2010" = mean(Jajka_Październik_2010),
+            "2009" = mean(Jajka_Październik_2009),
+            "2008" = mean(Jajka_Październik_2008),
+            "2007" = mean(Jajka_Październik_2007),
+            "2006" = mean(Jajka_Październik_2006))
+sr95<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Październik, cena)
+
+
+
+ggplot(sr95,aes(x =średnia_Jajka_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Październik_2019),
+            "2018" = mean(Jablka_Październik_2018),
+            "2017" = mean(Jablka_Październik_2017),
+            "2016" = mean(Jablka_Październik_2016),
+            "2015" = mean(Jablka_Październik_2015),
+            "2014" = mean(Jablka_Październik_2014),
+            "2013" = mean(Jablka_Październik_2013),
+            "2012" = mean(Jablka_Październik_2012),
+            "2011" = mean(Jablka_Październik_2011),
+            "2010" = mean(Jablka_Październik_2010),
+            "2009" = mean(Jablka_Październik_2009),
+            "2008" = mean(Jablka_Październik_2008),
+            "2007" = mean(Jablka_Październik_2007),
+            "2006" = mean(Jablka_Październik_2006))
+sr96<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Październik, cena)
+
+
+
+ggplot(sr96,aes(x =średnia_Jablka_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Październik_2019),
+            "2018" = mean(Ziemniaki_Październik_2018),
+            "2017" = mean(Ziemniaki_Październik_2017),
+            "2016" = mean(Ziemniaki_Październik_2016),
+            "2015" = mean(Ziemniaki_Październik_2015),
+            "2014" = mean(Ziemniaki_Październik_2014),
+            "2013" = mean(Ziemniaki_Październik_2013),
+            "2012" = mean(Ziemniaki_Październik_2012),
+            "2011" = mean(Ziemniaki_Październik_2011),
+            "2010" = mean(Ziemniaki_Październik_2010),
+            "2009" = mean(Ziemniaki_Październik_2009),
+            "2008" = mean(Ziemniaki_Październik_2008),
+            "2007" = mean(Ziemniaki_Październik_2007),
+            "2006" = mean(Ziemniaki_Październik_2006))
+
+sr97<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Październik, cena)
+
+ggplot(sr97,aes(x =średnia_Ziemniaki_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w październikach 2006-2019.")+
+  xlab("ROK")+ 
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Październik_2019),
+            "2018" = mean(Koszulka_Październik_2018),
+            "2017" = mean(Koszulka_Październik_2017),
+            "2016" = mean(Koszulka_Październik_2016),
+            "2015" = mean(Koszulka_Październik_2015),
+            "2014" = mean(Koszulka_Październik_2014),
+            "2013" = mean(Koszulka_Październik_2013),
+            "2012" = mean(Koszulka_Październik_2012),
+            "2011" = mean(Koszulka_Październik_2011),
+            "2010" = mean(Koszulka_Październik_2010),
+            "2009" = mean(Koszulka_Październik_2009),
+            "2008" = mean(Koszulka_Październik_2008),
+            "2007" = mean(Koszulka_Październik_2007),
+            "2006" = mean(Koszulka_Październik_2006))
+
+sr98<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Październik, cena)
+
+
+ggplot(sr98,aes(x =średnia_Koszulka_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Październik_2019),
+            "2018" = mean(Woda_Październik_2018),
+            "2017" = mean(Woda_Październik_2017),
+            "2016" = mean(Woda_Październik_2016),
+            "2015" = mean(Woda_Październik_2015),
+            "2014" = mean(Woda_Październik_2014),
+            "2013" = mean(Woda_Październik_2013),
+            "2012" = mean(Woda_Październik_2012),
+            "2011" = mean(Woda_Październik_2011),
+            "2010" = mean(Woda_Październik_2010),
+            "2009" = mean(Woda_Październik_2009),
+            "2008" = mean(Woda_Październik_2008),
+            "2007" = mean(Woda_Październik_2007),
+            "2006" = mean(Woda_Październik_2006))
+
+sr99<-gather(round(Sr_Woda, digits=2), średnia_Woda_Październik, cena)
+
+
+
+ggplot(sr99,aes(x =średnia_Woda_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Październik_2019),
+            "2018" = mean(Wegiel_kamienny_Październik_2018),
+            "2017" = mean(Wegiel_kamienny_Październik_2017),
+            "2016" = mean(Wegiel_kamienny_Październik_2016),
+            "2015" = mean(Wegiel_kamienny_Październik_2015),
+            "2014" = mean(Wegiel_kamienny_Październik_2014),
+            "2013" = mean(Wegiel_kamienny_Październik_2013),
+            "2012" = mean(Wegiel_kamienny_Październik_2012),
+            "2011" = mean(Wegiel_kamienny_Październik_2011),
+            "2010" = mean(Wegiel_kamienny_Październik_2010),
+            "2009" = mean(Wegiel_kamienny_Październik_2009),
+            "2008" = mean(Wegiel_kamienny_Październik_2008),
+            "2007" = mean(Wegiel_kamienny_Październik_2007),
+            "2006" = mean(Wegiel_kamienny_Październik_2006))
+
+sr100<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Październik, cena)
+
+
+
+ggplot(sr100,aes(x =średnia_Wegiel_kamienny_Październik, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w październikach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))        
+
+
+   #Listopady
+
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Listopad_2019),
+            "2018" = mean(Mleko_3.5proc_Listopad_2018),
+            "2017" = mean(Mleko_3.5proc_Listopad_2017),
+            "2016" = mean(Mleko_3.5proc_Listopad_2016),
+            "2015" = mean(Mleko_3.5proc_Listopad_2015),
+            "2014" = mean(Mleko_3.5proc_Listopad_2014),
+            "2013" = mean(Mleko_3.5proc_Listopad_2013),
+            "2012" = mean(Mleko_3.5proc_Listopad_2012),
+            "2011" = mean(Mleko_3.5proc_Listopad_2011),
+            "2010" = mean(Mleko_3.5proc_Listopad_2010),
+            "2009" = mean(Mleko_3.5proc_Listopad_2009),
+            "2008" = mean(Mleko_3.5proc_Listopad_2008),
+            "2007" = mean(Mleko_3.5proc_Listopad_2007),
+            "2006" = mean(Mleko_3.5proc_Listopad_2006))
+
+sr101<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Listopad, cena)
+4
+ggplot(sr101,aes(x =średnia_Mleko_3.5proc_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+
+
+Sr_Mleko_2.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_2.5proc_Listopad_2019),
+            "2018" = mean(Mleko_2.5proc_Listopad_2018),
+            "2017" = mean(Mleko_2.5proc_Listopad_2017),
+            "2016" = mean(Mleko_2.5proc_Listopad_2016),
+            "2015" = mean(Mleko_2.5proc_Listopad_2015),
+            "2014" = mean(Mleko_2.5proc_Listopad_2014),
+            "2013" = mean(Mleko_2.5proc_Listopad_2013),
+            "2012" = mean(Mleko_2.5proc_Listopad_2012),
+            "2011" = mean(Mleko_2.5proc_Listopad_2011),
+            "2010" = mean(Mleko_2.5proc_Listopad_2010),
+            "2009" = mean(Mleko_2.5proc_Listopad_2009),
+            "2008" = mean(Mleko_2.5proc_Listopad_2008),
+            "2007" = mean(Mleko_2.5proc_Listopad_2007),
+            "2006" = mean(Mleko_2.5proc_Listopad_2006))
+
+sr102<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Listopad, cena)
+
+ggplot(sr102,aes(x =średnia_Mleko_2.5proc_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+        
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Listopad_2019),
+            "2018" = mean(Ser_twarogowy_Listopad_2018),
+            "2017" = mean(Ser_twarogowy_Listopad_2017),
+            "2016" = mean(Ser_twarogowy_Listopad_2016),
+            "2015" = mean(Ser_twarogowy_Listopad_2015),
+            "2014" = mean(Ser_twarogowy_Listopad_2014),
+            "2013" = mean(Ser_twarogowy_Listopad_2013),
+            "2012" = mean(Ser_twarogowy_Listopad_2012),
+            "2011" = mean(Ser_twarogowy_Listopad_2011),
+            "2010" = mean(Ser_twarogowy_Listopad_2010),
+            "2009" = mean(Ser_twarogowy_Listopad_2009),
+            "2008" = mean(Ser_twarogowy_Listopad_2008),
+            "2007" = mean(Ser_twarogowy_Listopad_2007),
+            "2006" = mean(Ser_twarogowy_Listopad_2006))
+
+sr103<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Listopad, cena)
+
+
+
+ggplot(sr103,aes(x =średnia_Ser_twarogowy_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Listopad_2019),
+            "2018" = mean(Ser_dojrzewajacy_Listopad_2018),
+            "2017" = mean(Ser_dojrzewajacy_Listopad_2017),
+            "2016" = mean(Ser_dojrzewajacy_Listopad_2016),
+            "2015" = mean(Ser_dojrzewajacy_Listopad_2015),
+            "2014" = mean(Ser_dojrzewajacy_Listopad_2014),
+            "2013" = mean(Ser_dojrzewajacy_Listopad_2013),
+            "2012" = mean(Ser_dojrzewajacy_Listopad_2012),
+            "2011" = mean(Ser_dojrzewajacy_Listopad_2011),
+            "2010" = mean(Ser_dojrzewajacy_Listopad_2010),
+            "2009" = mean(Ser_dojrzewajacy_Listopad_2009),
+            "2008" = mean(Ser_dojrzewajacy_Listopad_2008),
+            "2007" = mean(Ser_dojrzewajacy_Listopad_2007),
+            "2006" = mean(Ser_dojrzewajacy_Listopad_2006))
+
+sr104<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Listopad, cena)
+
+
+
+ggplot(sr104,aes(x =średnia_Ser_dojrzewajacy_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Listopad_2019),
+            "2018" = mean(Jajka_Listopad_2018),
+            "2017" = mean(Jajka_Listopad_2017),
+            "2016" = mean(Jajka_Listopad_2016),
+            "2015" = mean(Jajka_Listopad_2015),
+            "2014" = mean(Jajka_Listopad_2014),
+            "2013" = mean(Jajka_Listopad_2013),
+            "2012" = mean(Jajka_Listopad_2012),
+            "2011" = mean(Jajka_Listopad_2011),
+            "2010" = mean(Jajka_Listopad_2010),
+            "2009" = mean(Jajka_Listopad_2009),
+            "2008" = mean(Jajka_Listopad_2008),
+            "2007" = mean(Jajka_Listopad_2007),
+            "2006" = mean(Jajka_Listopad_2006))
+sr105<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Listopad, cena)
+
+
+
+ggplot(sr105,aes(x =średnia_Jajka_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Listopad_2019),
+            "2018" = mean(Jablka_Listopad_2018),
+            "2017" = mean(Jablka_Listopad_2017),
+            "2016" = mean(Jablka_Listopad_2016),
+            "2015" = mean(Jablka_Listopad_2015),
+            "2014" = mean(Jablka_Listopad_2014),
+            "2013" = mean(Jablka_Listopad_2013),
+            "2012" = mean(Jablka_Listopad_2012),
+            "2011" = mean(Jablka_Listopad_2011),
+            "2010" = mean(Jablka_Listopad_2010),
+            "2009" = mean(Jablka_Listopad_2009),
+            "2008" = mean(Jablka_Listopad_2008),
+            "2007" = mean(Jablka_Listopad_2007),
+            "2006" = mean(Jablka_Listopad_2006))
+sr106<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Listopad, cena)
+
+
+
+ggplot(sr106,aes(x =średnia_Jablka_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Listopad_2019),
+            "2018" = mean(Ziemniaki_Listopad_2018),
+            "2017" = mean(Ziemniaki_Listopad_2017),
+            "2016" = mean(Ziemniaki_Listopad_2016),
+            "2015" = mean(Ziemniaki_Listopad_2015),
+            "2014" = mean(Ziemniaki_Listopad_2014),
+            "2013" = mean(Ziemniaki_Listopad_2013),
+            "2012" = mean(Ziemniaki_Listopad_2012),
+            "2011" = mean(Ziemniaki_Listopad_2011),
+            "2010" = mean(Ziemniaki_Listopad_2010),
+            "2009" = mean(Ziemniaki_Listopad_2009),
+            "2008" = mean(Ziemniaki_Listopad_2008),
+            "2007" = mean(Ziemniaki_Listopad_2007),
+            "2006" = mean(Ziemniaki_Listopad_2006))
+
+sr107<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Listopad, cena)
+
+ggplot(sr107,aes(x =średnia_Ziemniaki_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w listopadach 2006-2019.")+
+  xlab("ROK")+ 
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Listopad_2019),
+            "2018" = mean(Koszulka_Listopad_2018),
+            "2017" = mean(Koszulka_Listopad_2017),
+            "2016" = mean(Koszulka_Listopad_2016),
+            "2015" = mean(Koszulka_Listopad_2015),
+            "2014" = mean(Koszulka_Listopad_2014),
+            "2013" = mean(Koszulka_Listopad_2013),
+            "2012" = mean(Koszulka_Listopad_2012),
+            "2011" = mean(Koszulka_Listopad_2011),
+            "2010" = mean(Koszulka_Listopad_2010),
+            "2009" = mean(Koszulka_Listopad_2009),
+            "2008" = mean(Koszulka_Listopad_2008),
+            "2007" = mean(Koszulka_Listopad_2007),
+            "2006" = mean(Koszulka_Listopad_2006))
+
+sr108<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Listopad, cena)
+
+
+ggplot(sr108,aes(x =średnia_Koszulka_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Listopad_2019),
+            "2018" = mean(Woda_Listopad_2018),
+            "2017" = mean(Woda_Listopad_2017),
+            "2016" = mean(Woda_Listopad_2016),
+            "2015" = mean(Woda_Listopad_2015),
+            "2014" = mean(Woda_Listopad_2014),
+            "2013" = mean(Woda_Listopad_2013),
+            "2012" = mean(Woda_Listopad_2012),
+            "2011" = mean(Woda_Listopad_2011),
+            "2010" = mean(Woda_Listopad_2010),
+            "2009" = mean(Woda_Listopad_2009),
+            "2008" = mean(Woda_Listopad_2008),
+            "2007" = mean(Woda_Listopad_2007),
+            "2006" = mean(Woda_Listopad_2006))
+
+sr109<-gather(round(Sr_Woda, digits=2), średnia_Woda_Listopad, cena)
+
+
+
+ggplot(sr109,aes(x =średnia_Woda_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Listopad_2019),
+            "2018" = mean(Wegiel_kamienny_Listopad_2018),
+            "2017" = mean(Wegiel_kamienny_Listopad_2017),
+            "2016" = mean(Wegiel_kamienny_Listopad_2016),
+            "2015" = mean(Wegiel_kamienny_Listopad_2015),
+            "2014" = mean(Wegiel_kamienny_Listopad_2014),
+            "2013" = mean(Wegiel_kamienny_Listopad_2013),
+            "2012" = mean(Wegiel_kamienny_Listopad_2012),
+            "2011" = mean(Wegiel_kamienny_Listopad_2011),
+            "2010" = mean(Wegiel_kamienny_Listopad_2010),
+            "2009" = mean(Wegiel_kamienny_Listopad_2009),
+            "2008" = mean(Wegiel_kamienny_Listopad_2008),
+            "2007" = mean(Wegiel_kamienny_Listopad_2007),
+            "2006" = mean(Wegiel_kamienny_Listopad_2006))
+
+sr110<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Listopad, cena)
+
+
+
+ggplot(sr110,aes(x =średnia_Wegiel_kamienny_Listopad, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w listopadach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))        
+        
+
+   #Grudnie
+   
+Sr_Mleko_3.5proc<- tab %>%
+  summarise("2019" = mean(Mleko_3.5proc_Grudzień_2019),
+            "2018" = mean(Mleko_3.5proc_Grudzień_2018),
+            "2017" = mean(Mleko_3.5proc_Grudzień_2017),
+            "2016" = mean(Mleko_3.5proc_Grudzień_2016),
+            "2015" = mean(Mleko_3.5proc_Grudzień_2015),
+            "2014" = mean(Mleko_3.5proc_Grudzień_2014),
+            "2013" = mean(Mleko_3.5proc_Grudzień_2013),
+            "2012" = mean(Mleko_3.5proc_Grudzień_2012),
+            "2011" = mean(Mleko_3.5proc_Grudzień_2011),
+            "2010" = mean(Mleko_3.5proc_Grudzień_2010),
+            "2009" = mean(Mleko_3.5proc_Grudzień_2009),
+            "2008" = mean(Mleko_3.5proc_Grudzień_2008),
+            "2007" = mean(Mleko_3.5proc_Grudzień_2007),
+            "2006" = mean(Mleko_3.5proc_Grudzień_2006))
+
+sr111<-gather(round(Sr_Mleko_3.5proc, digits=2), średnia_Mleko_3.5proc_Grudzień, cena)
+4
+ggplot(sr111,aes(x =średnia_Mleko_3.5proc_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zaw. tłuszczu 3,5% w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Mleko_2.5proc<- tab %>%
+   summarise("2019" = mean(Mleko_2.5proc_Grudzień_2019),
+            "2018" = mean(Mleko_2.5proc_Grudzień_2018),
+            "2017" = mean(Mleko_2.5proc_Grudzień_2017),
+            "2016" = mean(Mleko_2.5proc_Grudzień_2016),
+            "2015" = mean(Mleko_2.5proc_Grudzień_2015),
+            "2014" = mean(Mleko_2.5proc_Grudzień_2014),
+            "2013" = mean(Mleko_2.5proc_Grudzień_2013),
+            "2012" = mean(Mleko_2.5proc_Grudzień_2012),
+            "2011" = mean(Mleko_2.5proc_Grudzień_2011),
+            "2010" = mean(Mleko_2.5proc_Grudzień_2010),
+            "2009" = mean(Mleko_2.5proc_Grudzień_2009),
+            "2008" = mean(Mleko_2.5proc_Grudzień_2008),
+            "2007" = mean(Mleko_2.5proc_Grudzień_2007),
+            "2006" = mean(Mleko_2.5proc_Grudzień_2006))
+
+sr112<-gather(round(Sr_Mleko_2.5proc, digits=2), średnia_Mleko_2.5proc_Grudzień, cena)
+
+ggplot(sr112,aes(x =średnia_Mleko_2.5proc_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena mleka o zawartości 2,5% tłuszczu w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / LITR")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ser_twarogowy<- tab %>%
+  summarise("2019" = mean(Ser_twarogowy_Grudzień_2019),
+            "2018" = mean(Ser_twarogowy_Grudzień_2018),
+            "2017" = mean(Ser_twarogowy_Grudzień_2017),
+            "2016" = mean(Ser_twarogowy_Grudzień_2016),
+            "2015" = mean(Ser_twarogowy_Grudzień_2015),
+            "2014" = mean(Ser_twarogowy_Grudzień_2014),
+            "2013" = mean(Ser_twarogowy_Grudzień_2013),
+            "2012" = mean(Ser_twarogowy_Grudzień_2012),
+            "2011" = mean(Ser_twarogowy_Grudzień_2011),
+            "2010" = mean(Ser_twarogowy_Grudzień_2010),
+            "2009" = mean(Ser_twarogowy_Grudzień_2009),
+            "2008" = mean(Ser_twarogowy_Grudzień_2008),
+            "2007" = mean(Ser_twarogowy_Grudzień_2007),
+            "2006" = mean(Ser_twarogowy_Grudzień_2006))
+
+sr113<-gather(round(Sr_Ser_twarogowy, digits=2), średnia_Ser_twarogowy_Grudzień, cena)
+
+
+
+ggplot(sr113,aes(x =średnia_Ser_twarogowy_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="white", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera twarogowego półtłustego w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+Sr_Ser_dojrzewajacy<- tab %>%
+  summarise("2019" = mean(Ser_dojrzewajacy_Grudzień_2019),
+            "2018" = mean(Ser_dojrzewajacy_Grudzień_2018),
+            "2017" = mean(Ser_dojrzewajacy_Grudzień_2017),
+            "2016" = mean(Ser_dojrzewajacy_Grudzień_2016),
+            "2015" = mean(Ser_dojrzewajacy_Grudzień_2015),
+            "2014" = mean(Ser_dojrzewajacy_Grudzień_2014),
+            "2013" = mean(Ser_dojrzewajacy_Grudzień_2013),
+            "2012" = mean(Ser_dojrzewajacy_Grudzień_2012),
+            "2011" = mean(Ser_dojrzewajacy_Grudzień_2011),
+            "2010" = mean(Ser_dojrzewajacy_Grudzień_2010),
+            "2009" = mean(Ser_dojrzewajacy_Grudzień_2009),
+            "2008" = mean(Ser_dojrzewajacy_Grudzień_2008),
+            "2007" = mean(Ser_dojrzewajacy_Grudzień_2007),
+            "2006" = mean(Ser_dojrzewajacy_Grudzień_2006))
+
+sr114<-gather(round(Sr_Ser_dojrzewajacy, digits=2), średnia_Ser_dojrzewajacy_Grudzień, cena)
+
+
+
+ggplot(sr114,aes(x =średnia_Ser_dojrzewajacy_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="yellow", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena sera dojrzewającego w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_Jajka<- tab %>%
+  summarise("2019" = mean(Jajka_Grudzień_2019),
+            "2018" = mean(Jajka_Grudzień_2018),
+            "2017" = mean(Jajka_Grudzień_2017),
+            "2016" = mean(Jajka_Grudzień_2016),
+            "2015" = mean(Jajka_Grudzień_2015),
+            "2014" = mean(Jajka_Grudzień_2014),
+            "2013" = mean(Jajka_Grudzień_2013),
+            "2012" = mean(Jajka_Grudzień_2012),
+            "2011" = mean(Jajka_Grudzień_2011),
+            "2010" = mean(Jajka_Grudzień_2010),
+            "2009" = mean(Jajka_Grudzień_2009),
+            "2008" = mean(Jajka_Grudzień_2008),
+            "2007" = mean(Jajka_Grudzień_2007),
+            "2006" = mean(Jajka_Grudzień_2006))
+sr115<-gather(round(Sr_Jajka, digits=2), średnia_Jajka_Grudzień, cena)
+
+
+
+ggplot(sr115,aes(x =średnia_Jajka_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="orange", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jajek w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Jablka<- tab %>%
+  summarise("2019" = mean(Jablka_Grudzień_2019),
+            "2018" = mean(Jablka_Grudzień_2018),
+            "2017" = mean(Jablka_Grudzień_2017),
+            "2016" = mean(Jablka_Grudzień_2016),
+            "2015" = mean(Jablka_Grudzień_2015),
+            "2014" = mean(Jablka_Grudzień_2014),
+            "2013" = mean(Jablka_Grudzień_2013),
+            "2012" = mean(Jablka_Grudzień_2012),
+            "2011" = mean(Jablka_Grudzień_2011),
+            "2010" = mean(Jablka_Grudzień_2010),
+            "2009" = mean(Jablka_Grudzień_2009),
+            "2008" = mean(Jablka_Grudzień_2008),
+            "2007" = mean(Jablka_Grudzień_2007),
+            "2006" = mean(Jablka_Grudzień_2006))
+sr116<-gather(round(Sr_Jablka, digits=2), średnia_Jablka_Grudzień, cena)
+
+
+
+ggplot(sr116,aes(x =średnia_Jablka_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="red", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena jabłek w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Ziemniaki<- tab %>%
+  summarise("2019" = mean(Ziemniaki_Grudzień_2019),
+            "2018" = mean(Ziemniaki_Grudzień_2018),
+            "2017" = mean(Ziemniaki_Grudzień_2017),
+            "2016" = mean(Ziemniaki_Grudzień_2016),
+            "2015" = mean(Ziemniaki_Grudzień_2015),
+            "2014" = mean(Ziemniaki_Grudzień_2014),
+            "2013" = mean(Ziemniaki_Grudzień_2013),
+            "2012" = mean(Ziemniaki_Grudzień_2012),
+            "2011" = mean(Ziemniaki_Grudzień_2011),
+            "2010" = mean(Ziemniaki_Grudzień_2010),
+            "2009" = mean(Ziemniaki_Grudzień_2009),
+            "2008" = mean(Ziemniaki_Grudzień_2008),
+            "2007" = mean(Ziemniaki_Grudzień_2007),
+            "2006" = mean(Ziemniaki_Grudzień_2006))
+
+sr117<-gather(round(Sr_Ziemniaki, digits=2), średnia_Ziemniaki_Grudzień, cena)
+
+ggplot(sr117,aes(x =średnia_Ziemniaki_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="brown", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena ziemniaków w grudniach 2006-2019.")+
+  xlab("ROK")+ 
+  ylab("CENA   W   ZŁ / KG")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Koszulka<- tab %>%
+  summarise("2019" = mean(Koszulka_Grudzień_2019),
+            "2018" = mean(Koszulka_Grudzień_2018),
+            "2017" = mean(Koszulka_Grudzień_2017),
+            "2016" = mean(Koszulka_Grudzień_2016),
+            "2015" = mean(Koszulka_Grudzień_2015),
+            "2014" = mean(Koszulka_Grudzień_2014),
+            "2013" = mean(Koszulka_Grudzień_2013),
+            "2012" = mean(Koszulka_Grudzień_2012),
+            "2011" = mean(Koszulka_Grudzień_2011),
+            "2010" = mean(Koszulka_Grudzień_2010),
+            "2009" = mean(Koszulka_Grudzień_2009),
+            "2008" = mean(Koszulka_Grudzień_2008),
+            "2007" = mean(Koszulka_Grudzień_2007),
+            "2006" = mean(Koszulka_Grudzień_2006))
+
+sr118<-gather(round(Sr_Koszulka, digits=2), średnia_Koszulka_Grudzień, cena)
+
+
+ggplot(sr118,aes(x =średnia_Koszulka_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="blue", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena koszulki w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / SZT")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+
+Sr_Woda<- tab %>%
+  summarise("2019" = mean(Woda_Grudzień_2019),
+            "2018" = mean(Woda_Grudzień_2018),
+            "2017" = mean(Woda_Grudzień_2017),
+            "2016" = mean(Woda_Grudzień_2016),
+            "2015" = mean(Woda_Grudzień_2015),
+            "2014" = mean(Woda_Grudzień_2014),
+            "2013" = mean(Woda_Grudzień_2013),
+            "2012" = mean(Woda_Grudzień_2012),
+            "2011" = mean(Woda_Grudzień_2011),
+            "2010" = mean(Woda_Grudzień_2010),
+            "2009" = mean(Woda_Grudzień_2009),
+            "2008" = mean(Woda_Grudzień_2008),
+            "2007" = mean(Woda_Grudzień_2007),
+            "2006" = mean(Woda_Grudzień_2006))
+
+sr119<-gather(round(Sr_Woda, digits=2), średnia_Woda_Grudzień, cena)
+
+
+
+ggplot(sr119,aes(x =średnia_Woda_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="grey", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena wody za metr sześcienny w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / M^3")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))  
+
+
+Sr_Wegiel_kamienny<- tab %>%
+  summarise("2019" = mean(Wegiel_kamienny_Grudzień_2019),
+            "2018" = mean(Wegiel_kamienny_Grudzień_2018),
+            "2017" = mean(Wegiel_kamienny_Grudzień_2017),
+            "2016" = mean(Wegiel_kamienny_Grudzień_2016),
+            "2015" = mean(Wegiel_kamienny_Grudzień_2015),
+            "2014" = mean(Wegiel_kamienny_Grudzień_2014),
+            "2013" = mean(Wegiel_kamienny_Grudzień_2013),
+            "2012" = mean(Wegiel_kamienny_Grudzień_2012),
+            "2011" = mean(Wegiel_kamienny_Grudzień_2011),
+            "2010" = mean(Wegiel_kamienny_Grudzień_2010),
+            "2009" = mean(Wegiel_kamienny_Grudzień_2009),
+            "2008" = mean(Wegiel_kamienny_Grudzień_2008),
+            "2007" = mean(Wegiel_kamienny_Grudzień_2007),
+            "2006" = mean(Wegiel_kamienny_Grudzień_2006))
+
+sr120<-gather(round(Sr_Wegiel_kamienny, digits=2), średnia_Wegiel_kamienny_Grudzień, cena)
+
+
+
+ggplot(sr120,aes(x =średnia_Wegiel_kamienny_Grudzień, digits=2,y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="black", width = 0.6)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Średnia cena węgla za tonę w grudniach 2006-2019.")+
+  xlab("ROK")+
+  ylab("CENA   W   ZŁ / TONA")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))     
+        
+  #Ważny moment: oto porównanie cen koszyka zakupów w badanych latach 2006-201      
+        
+ 
+  średniecenykoszyka = (Sr_Mleko_2.5proc + Sr_Mleko_3.5proc + Sr_Ser_dojrzewajacy + Sr_Koszulka + Sr_Ziemniaki  
+                        + Sr_Woda + Sr_Wegiel_kamienny + Sr_Ser_twarogowy + Sr_Jajka + Sr_Jablka)
+  
+  kosztkoszyka<-gather(round(średniecenykoszyka, digits=2), ROK, KOSZYK)
+  View(kosztkoszyka)
+  print(kosztkoszyka)
+  
+  
+  
+  #Bez uwzględnienia węgla, którego tak często na co dzień nie kupujemy. 
+  
+  
+  średniecenykoszykabezwegla = (Sr_Mleko_2.5proc + Sr_Mleko_3.5proc + Sr_Ser_dojrzewajacy + 
+                                Sr_Koszulka + Sr_Ziemniaki + Sr_Woda  + Sr_Ser_twarogowy
+                                + Sr_Jajka + Sr_Jablka)
+  
+  kosztkoszykabezwegla<-gather(round(średniecenykoszykabezwegla, digits=2), ROK, KOSZYK)
+  View(kosztkoszykabezwegla)
+  
+  
+  
+  Sr_toww<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Styczen_2006),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Styczen_2006),
+            "Ser twarogowy" = mean(Ser_twarogowy_Styczen_2006),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Styczen_2006),
+            "Jajka" = mean(Jajka_Styczen_2006),
+            "Jabłka" = mean(Jablka_Styczen_2010),
+            "Ziemniaki" = mean(Ziemniaki_Styczen_2006),
+            "Koszulka" = mean(Koszulka_Styczen_2006),
+            "Woda" = mean(Woda_Styczen_2006),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Styczen_2006))
+
+
+blablabla<-gather(round(Sr_toww, digits=2), średnia_Towary_Styczen_2006, cena)
+
+
+ggplot(blablabla,aes(x = średnia_Towary_Styczen_2006, y =round(cena, digits=2)))+
+  geom_bar(stat="identity", fill="green", width = 0.69)+
+  geom_text(aes(label=cena), vjust=-0.5)+
+  ggtitle("Ceny w koszyku zakupów w styczniu 2006.")+
+  xlab("PRODUKT")+
+  ylab("CENA W ZŁ")+
+  theme_light()+
+  theme(text = element_text(size=13),
+        axis.text.x = element_text(angle=45, hjust=1))
+        
+        
+        

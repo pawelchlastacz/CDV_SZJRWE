@@ -1,0 +1,388 @@
+Sr_tow20062<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2006),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2006),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2006),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2006),
+            "Jajka" = mean(Jajka_Luty_2006),
+            "Jabłka" = mean(Jablka_Luty_2006),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2006),
+            "Koszulka" = mean(Koszulka_Luty_2006),
+            "Woda" = mean(Woda_Luty_2006),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2006))
+
+
+sr0602-gather(round(Sr_tow20062, digits=2), średnia_Towary_Luty_2006, cena)
+
+
+ggplot(sr0602,aes(x = średnia_Towary_Luty_2006, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2006 r.")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+
+Sr_tow20072<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2007),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2007),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2007),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2007),
+            "Jajka" = mean(Jajka_Luty_2007),
+            "Jabłka" = mean(Jablka_Luty_2007),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2007),
+            "Koszulka" = mean(Koszulka_Luty_2007),
+            "Woda" = mean(Woda_Luty_2007),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2007))
+
+
+sr0702<-gather(round(Sr_tow20072, digits=2), średnia_Towary_Luty_2007, cena)
+
+
+ggplot(sr0702,aes(x = średnia_Towary_Luty_2007, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2007 r.")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+               
+Sr_tow20082<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2008),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2008),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2008),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2008),
+            "Jajka" = mean(Jajka_Luty_2008),
+            "Jabłka" = mean(Jablka_Luty_2008),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2008),
+            "Koszulka" = mean(Koszulka_Luty_2008),
+            "Woda" = mean(Woda_Luty_2008),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2008))
+
+
+sr0802<-gather(round(Sr_tow20081, digits=2), średnia_Towary_Luty_2008, cena)
+
+
+ggplot(sr0802,aes(x = średnia_Towary_Luty_2008, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2008.")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_tow20091<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2009),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2009),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2009),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2009),
+            "Jajka" = mean(Jajka_Luty_2009),
+            "Jabłka" = mean(Jablka_Luty_2009),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2009),
+            "Koszulka" = mean(Koszulka_Luty_2009),
+            "Woda" = mean(Woda_Luty_2009),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2009))
+
+
+sr0901<-gather(round(Sr_tow20091, digits=2), średnia_Towary_Luty_2009, cena)
+
+
+ggplot(sr0901,aes(x = średnia_Towary_Luty_2009, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2009")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+Sr_tow20102<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2010),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2010),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2010),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2010),
+            "Jajka" = mean(Jajka_Luty_2010),
+            "Jabłka" = mean(Jablka_Luty_2010),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2010),
+            "Koszulka" = mean(Koszulka_Luty_2010),
+            "Woda" = mean(Woda_Luty_2010),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2010))
+
+
+sr1002<-gather(round(Sr_tow20102, digits=2), średnia_Towary_Luty_2010, cena)
+
+
+ggplot(sr1001,aes(x = średnia_Towary_Luty_2010, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2010")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+              
+
+Sr_tow20111<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2011),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2011),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2011),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2011),
+            "Jajka" = mean(Jajka_Luty_2011),
+            "Jabłka" = mean(Jablka_Luty_2011),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2011),
+            "Koszulka" = mean(Koszulka_Luty_2011),
+            "Woda" = mean(Woda_Luty_2011),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2011))
+
+
+sr1101<-gather(round(Sr_tow20111, digits=2), średnia_Towary_Luty_2011, cena)
+
+
+ggplot(sr1101,aes(x = średnia_Towary_Luty_2011, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2011")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+
+Sr_tow20121<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2012),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2012),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2012),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2012),
+            "Jajka" = mean(Jajka_Luty_2012),
+            "Jabłka" = mean(Jablka_Luty_2012),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2012),
+            "Koszulka" = mean(Koszulka_Luty_2012),
+            "Woda" = mean(Woda_Luty_2012),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2012))
+
+
+sr1201<-gather(round(Sr_tow20121, digits=2), średnia_Towary_Luty_2012, cena)
+
+
+ggplot(sr1201,aes(x = średnia_Towary_Luty_2012, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2012")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))               
+               
+               
+
+Sr_tow20131<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2013),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2013),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2013),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2013),
+            "Jajka" = mean(Jajka_Luty_2013),
+            "Jabłka" = mean(Jablka_Luty_2013),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2013),
+            "Koszulka" = mean(Koszulka_Luty_2013),
+            "Woda" = mean(Woda_Luty_2013),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2013))
+
+
+sr1301<-gather(round(Sr_tow20131, digits=2), średnia_Towary_Luty_2013, cena)
+
+
+ggplot(sr1301,aes(x = średnia_Towary_Luty_2013, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2013")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+
+Sr_tow20141<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2014),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2014),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2014),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2014),
+            "Jajka" = mean(Jajka_Luty_2014),
+            "Jabłka" = mean(Jablka_Luty_2014),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2014),
+            "Koszulka" = mean(Koszulka_Luty_2014),
+            "Woda" = mean(Woda_Luty_2014),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2014))
+
+
+sr1401<-gather(round(Sr_tow20141, digits=2), średnia_Towary_Luty_2014, cena)
+
+
+ggplot(sr1401,aes(x = średnia_Towary_Luty_2014, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2014")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+
+
+Sr_tow20151<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2015),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2015),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2015),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2015),
+            "Jajka" = mean(Jajka_Luty_2015),
+            "Jabłka" = mean(Jablka_Luty_2015),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2015),
+            "Koszulka" = mean(Koszulka_Luty_2015),
+            "Woda" = mean(Woda_Luty_2015),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2015))
+
+
+sr1501<-gather(round(Sr_tow20151, digits=2), średnia_Towary_Luty_2015, cena)
+
+
+ggplot(sr1501,aes(x = średnia_Towary_Luty_2015, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2015")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+
+Sr_tow20161<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2016),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2016),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2016),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2016),
+            "Jajka" = mean(Jajka_Luty_2016),
+            "Jabłka" = mean(Jablka_Luty_2016),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2016),
+            "Koszulka" = mean(Koszulka_Luty_2016),
+            "Woda" = mean(Woda_Luty_2016),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2016))
+
+
+sr1601<-gather(round(Sr_tow20161, digits=2), średnia_Towary_Luty_2016, cena)
+
+
+ggplot(sr1601,aes(x = średnia_Towary_Luty_2016, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2016")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+               
+               
+
+Sr_tow20171<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2017),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2017),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2017),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2017),
+            "Jajka" = mean(Jajka_Luty_2017),
+            "Jabłka" = mean(Jablka_Luty_2017),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2017),
+            "Koszulka" = mean(Koszulka_Luty_2017),
+            "Woda" = mean(Woda_Luty_2017),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2017))
+
+
+sr1701<-gather(round(Sr_tow20171, digits=2), średnia_Towary_Luty_2017, cena)
+
+
+ggplot(sr1701,aes(x = średnia_Towary_Luty_2017, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2017")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+
+  
+
+Sr_tow20181<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2018),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2018),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2018),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2018),
+            "Jajka" = mean(Jajka_Luty_2018),
+            "Jabłka" = mean(Jablka_Luty_2018),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2018),
+            "Koszulka" = mean(Koszulka_Luty_2018),
+            "Woda" = mean(Woda_Luty_2018),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2018))
+
+
+sr1801<-gather(round(Sr_tow20181, digits=2), średnia_Towary_Luty_2018, cena)
+
+
+ggplot(sr1801,aes(x = średnia_Towary_Luty_2018, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2018")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+
+  
+
+Sr_tow20191<- tab %>%
+  summarise("Mleko 3.5%" = mean(Mleko_3.5proc_Luty_2019),
+            "Mleko 2,5%" = mean(Mleko_2.5proc_Luty_2019),
+            "Ser twarogowy" = mean(Ser_twarogowy_Luty_2019),
+            "Ser dojrzewający" = mean(Ser_dojrzewajacy_Luty_2019),
+            "Jajka" = mean(Jajka_Luty_2019),
+            "Jabłka" = mean(Jablka_Luty_2019),
+            "Ziemniaki" = mean(Ziemniaki_Luty_2019),
+            "Koszulka" = mean(Koszulka_Luty_2019),
+            "Woda" = mean(Woda_Luty_2019),
+            "Wegiel kamienny" = mean(Wegiel_kamienny_Luty_2019))
+
+
+sr1901<-gather(round(Sr_tow20191, digits=2), średnia_Towary_Luty_2019, cena)
+
+
+ggplot(sr1901,aes(x = średnia_Towary_Luty_2019, y =round(cena, digits=2)))+
+        geom_bar(stat="identity", fill="green", width = 0.69)+
+        geom_text(aes(label=cena), vjust=-0.5)+
+        ggtitle("Ceny w koszyku zakupów w lutym 2019")+
+        xlab("PRODUKT")+
+        ylab("CENA W ZŁ")+
+        theme_light()+
+        theme(text = element_text(size=13),
+               axis.text.x = element_text(angle=45, hjust=1))
+
+Koszyki_lutowe = (Sr_tow20062 + Sr_tow20072 + Sr_tow20082 + Sr_tow20092 + Sr_tow20102  
+                     + Sr_tow20112 + Sr_tow20122 + Sr_tow20132 + Sr_tow20142 + Sr_tow20152
+                     + Sr_tow20162 + Sr_tow20182 + Sr_tow20182 + Sr_tow20192)
+
+Srednia2= Koszyki_lutowe/12
+
+print(Srednia2)
